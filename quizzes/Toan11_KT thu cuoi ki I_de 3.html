@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>KIỂM TRA THỬ CUỐI KÌ I - ĐỀ 3</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 15px; line-height: 1.6; padding-top: 70px; overflow-x: hidden; background: #f7fbff; }
+        .header-bar { position: fixed; top: 0; left: 0; width: 100%; background: #1e88e5; color: white; padding: 10px 15px; z-index: 1000; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; box-shadow: 0 2px 6px rgba(30,136,229,0.2); }
+        .header-bar h2 { margin: 0; font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 65%; }
+        #timer { font-size: 16px; font-weight: bold; background: #e53935; padding: 5px 10px; border-radius: 4px; white-space: nowrap; }
+        
+        .zalo-warning { background: #eef6fc; color: #1565c0; padding: 10px; border: 1px solid #b3d4fc; border-radius: 4px; margin-bottom: 15px; font-weight: bold; text-align: justify; font-size: 14px; }
+        
+        h3 { color: #1565c0; border-bottom: 2px solid #b3d4fc; padding-bottom: 5px; margin-top: 30px; text-transform: uppercase; font-size: 18px; }
+        .info-group { margin-bottom: 15px; }
+        .info-group input { width: 100%; padding: 12px; box-sizing: border-box; border: 1px solid #b3d4fc; border-radius: 4px; font-size: 16px; background: #fff; }
+        .info-group input:focus { border-color: #1e88e5; outline: none; box-shadow: 0 0 0 3px rgba(30,136,229,0.12); }
+        
+        .question { background: #eef6fc; padding: 15px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #b3d4fc; box-sizing: border-box; width: 100%; overflow-x: auto; }
+        .question-text { margin-bottom: 15px; word-wrap: break-word; } 
+        
+        mjx-container { max-width: 100%; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; }
+        
+        .options label { display: block; padding: 10px; margin: 8px 0; background: #ffffff; border: 1px solid #b3d4fc; border-radius: 4px; cursor: pointer; transition: 0.3s; }
+        .options label:hover { background: #e3f0fb; border-color: #1e88e5; }
+        
+        .table-responsive { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 15px 0; }
+        .tf-table { width: 100%; border-collapse: collapse; background: #fff; min-width: 320px; }
+        .tf-table td { padding: 10px; border: 1px solid #b3d4fc; }
+        .tf-radio-group { display: flex; gap: 10px; justify-content: center; }
+        .tf-radio-group label { cursor: pointer; font-weight: bold; padding: 5px; border-radius: 3px; transition: 0.3s; }
+        
+        .short-ans-group { display: flex; gap: 8px; margin-top: 5px; flex-wrap: wrap; }
+        .short-ans-box { width: 50px; height: 55px; font-size: 24px; text-align: center; border: 2px solid #1e88e5; border-radius: 5px; box-sizing: border-box; font-weight: bold; color: #1565c0; background: #fff; transition: 0.3s; }
+        .short-ans-box:focus { border-color: #0d47a1; outline: none; box-shadow: 0 0 6px rgba(30,136,229,0.3); }
+        
+        .essay-input { width: 100%; padding: 12px; font-size: 16px; border: 2px solid #b3d4fc; border-radius: 4px; box-sizing: border-box; height: 150px; resize: vertical; background: #fff; }
+        .essay-input:focus { border-color: #1e88e5; outline: none; }
+        
+        .solution-box { display: none; margin-top: 15px; padding: 15px; background: #e8f4fc; border-left: 5px solid #0288d1; border-radius: 4px; overflow-x: auto; }
+        
+        button.submit-btn { width: 100%; padding: 15px; background: #1e88e5; color: white; border: none; border-radius: 4px; font-size: 18px; cursor: pointer; margin-top: 15px; font-weight: bold; margin-bottom: 5px; }
+        button.submit-btn:hover { background: #1565c0; }
+        #result { display: none; margin-top: 20px; padding: 15px; border-radius: 4px; text-align: center; font-weight: bold; font-size: 18px; background: #eef6fc; color: #0d47a1; border: 1px solid #b3d4fc; margin-bottom: 20px;}
+        
+        #passwordPrompt { display: none; margin-top: 20px; padding: 20px; background: #eef6fc; border: 1px solid #b3d4fc; border-radius: 5px; text-align: center; margin-bottom: 40px; }
+        #passwordPrompt h4 { color: #1565c0; margin-top: 0; margin-bottom: 10px; }
+        #passwordPrompt input { padding: 10px; width: 60%; max-width: 250px; border: 1px solid #b3d4fc; border-radius: 4px; font-size: 16px; }
+        #passwordPrompt button { width: auto; padding: 10px 20px; background: #1e88e5; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; font-weight: bold; margin-top: 10px; margin-left: 10px; }
+        
+        /* --- SVG / ẢNH + KHUNG ZOOM DÙNG CHUNG (khung tự co giãn, không đặt chiều cao cố định) --- */
+        :root {
+            --zoom-accent: #1e88e5; --zoom-accent-hover: #1565c0;
+            --zoom-border: #b3d4fc; --zoom-bar-bg: #eef6fc; --zoom-max-h: none;
+        }
+        svg { max-width: 100%; height: auto; display: block; margin: 10px auto; overflow: visible; }
+        svg text { font-family: Arial, sans-serif; }
+        img { max-width: 100%; height: auto; }
+        .zoom-container { display: flex; align-items: flex-start; gap: 10px; margin: 15px 0; }
+        .zoom-viewport {
+            flex: 1 1 auto; min-width: 0;
+            overflow: auto; -webkit-overflow-scrolling: touch;
+            border: 1px solid var(--zoom-border); border-radius: 4px; background: #fff;
+            box-sizing: border-box; padding: 4px;
+        }
+        /* chỉ giới hạn chiều cao và giữ cuộn bên trong khi ảnh đang được phóng to */
+        .zoom-viewport.can-pan { cursor: grab; max-height: var(--zoom-max-h); overscroll-behavior: contain; }
+        .zoom-viewport.dragging { cursor: grabbing; user-select: none; }
+        .zoom-toolbar { display: flex; flex-direction: column; gap: 5px; background: var(--zoom-bar-bg); padding: 5px; border-radius: 4px; border: 1px solid var(--zoom-border); flex-shrink: 0; }
+        .zoom-btn { background: var(--zoom-accent); color: #fff; border: none; padding: 6px 10px; font-size: 14px; border-radius: 4px; cursor: pointer; transition: background .2s, opacity .2s; white-space: nowrap; }
+        .zoom-btn:hover:not(:disabled) { background: var(--zoom-accent-hover); }
+        .zoom-btn:disabled { background: #ccc; cursor: not-allowed; opacity: .6; }
+        .zoom-media { display: block; margin: 0 auto; max-width: 100%; height: auto; user-select: none; -webkit-user-drag: none; }
+        .zoom-media.zoomed { width: var(--zw) !important; max-width: none !important; height: auto !important; }
+
+        
+        /* ===== Bổ sung của bộ chuyển đổi TeX2HTML (PyQt6) ===== */
+        .tp { margin: 6px 0; }
+        .center { text-align: center; }
+        .figure svg, .figure img { max-width: 100%; height: auto; }
+        .fig-error { color: #b00020; border: 1px dashed #b00020; padding: 6px 10px; text-align: center; margin: 8px 0; font-size: 14px; }
+        .fbox { border: 1px solid currentColor; padding: 0 4px; }
+        blockquote { margin: 8px 20px; }
+        img { max-width: 100%; height: auto; }
+        ul, ol { margin: 6px 0; padding-left: 24px; }
+        ul.desc, li.cl { list-style: none; }
+        li.cl .lbl { font-weight: bold; margin-right: .4em; }
+        ol[class^="paren-"] { list-style: none; counter-reset: pc; padding-left: 2.2em; }
+        ol[class^="paren-"] > li { counter-increment: pc; position: relative; margin: 4px 0; }
+        ol[class^="paren-"] > li::before { position: absolute; left: -2.2em; width: 2em; text-align: right; font-weight: bold; }
+        ol.paren-a > li::before { content: counter(pc, lower-alpha) ")"; }
+        ol.paren-A > li::before { content: counter(pc, upper-alpha) ")"; }
+        ol.paren-i > li::before { content: counter(pc, lower-roman) ")"; }
+        ol.paren-I > li::before { content: counter(pc, upper-roman) ")"; }
+        ol.paren-1 > li::before { content: counter(pc, decimal) ")"; }
+        table.tex-table { border-collapse: collapse; margin: 8px auto; }
+        table.tex-table td { padding: 4px 10px; }
+        table.tex-table.bordered td { border: 1px solid #555; }
+
+
+
+        .author-footer { margin: 30px 0 10px; padding-top: 10px; border-top: 1px solid #b3d4fc; text-align: center; color: #5f7b94; font-size: 13px; }
+        .author-footer:empty { display: none; }
+    </style>
+    
+    <script>
+        window.MathJax = {
+          tex: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            displayMath: [['$$','$$'], ['\\[','\\]']],
+            processEscapes: true,
+            macros: {"wideparen": ["\\overset{\\frown}{#1}", 1], "overarc": ["\\overset{\\frown}{#1}", 1], "phone": "0973 400 524", "facenhom": "Zalo"}
+          },
+          options: { enableMenu: false }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+</head>
+<body>
+    <div class="header-bar">
+        <h2>KIỂM TRA THỬ CUỐI KÌ I - ĐỀ 3</h2>
+        <div id="timer">Đang tải...</div>
+    </div>
+    
+    <div class="zalo-warning" id="zaloWarning">
+        ⚠️ CHÚ Ý: Nếu em đang mở bài này trực tiếp trên Zalo/Messenger, hãy bấm vào biểu tượng "Dấu 3 chấm" ở góc phải màn hình và chọn "Mở bằng trình duyệt" (Chrome/Safari) để không bị lỗi kết nối.
+    </div>
+
+    <div class="info-group">
+        <label>Họ và tên học sinh:</label>
+        <input type="text" id="studentName" placeholder="Nhập họ và tên..." required>
+    </div>
+    <div class="info-group">
+        <label>Lớp:</label>
+        <input type="text" id="studentClass" placeholder="Nhập lớp..." required>
+    </div>
+
+    <hr>
+    <form id="quizForm" onsubmit="return false;">
+        <h3>PHẦN 1. Câu trắc nghiệm nhiều phương án lựa chọn</h3>
+<div class="question"><div class="question-text"><div class="tp"><b>Câu 1:</b> Cho hàm số $f(x)=\left\{\begin{aligned}&amp;\dfrac{3x^2-27}{2x^2+4x-30}&amp;\,\,\text{khi}\,\, x\ne3\\ &amp;mx-3&amp;\,\,\text{khi}\,\, x=3\end{aligned}\right.$. Tìm $m$ để hàm số đã cho liên tục tại điểm $x=3$.</div></div><div class="options"><label><input type="radio" name="P1_Cau_1" value="A"> <b>A.</b> $m=\dfrac{33}{8}$</label><label><input type="radio" name="P1_Cau_1" value="B"> <b>B.</b> $m=-\dfrac{5}{8}$</label><label><input type="radio" name="P1_Cau_1" value="C"> <b>C.</b> $m=\dfrac{11}{8}$</label><label><input type="radio" name="P1_Cau_1" value="D"> <b>D.</b> $m=\dfrac{3}{8}$</label></div><div class="solution-box"><div class="tp"><b>Lời giải chi tiết:</b> Ta có $\lim\limits_{x\to 3}f(x)=\lim\limits_{x\to 3}\dfrac{3(x+3)(x-3)}{(x-3)(2x+10)}=\dfrac{9}{8},f(3)=3m-3$.<br> Để hàm số liên tục tại $x=3$ thì $\lim\limits_{x\to3}f(x)=f(3)\Leftrightarrow m=\dfrac{11}{8}$.</div></div></div>
+<div class="question"><div class="question-text"><div class="tp"><b>Câu 2:</b> Cho cấp số cộng $\left(u_n\right)$ có $u_1=3$ và $u_2=-1$. Khi đó</div></div><div class="options"><label><input type="radio" name="P1_Cau_2" value="A"> <b>A.</b> $u_3=7$</label><label><input type="radio" name="P1_Cau_2" value="B"> <b>B.</b> $u_3=4$</label><label><input type="radio" name="P1_Cau_2" value="C"> <b>C.</b> $u_3=-5$</label><label><input type="radio" name="P1_Cau_2" value="D"> <b>D.</b> $u_3=2$</label></div><div class="solution-box"><div class="tp"><b>Lời giải chi tiết:</b> Ta có $d=u_2-u_1=-1-3=-4$, suy ra $u_3=u_1+2d=3+2\cdot(-4)=-5$.</div></div></div>
+<div class="question"><div class="question-text"><div class="tp"><b>Câu 3:</b> Cho hai mặt phẳng song song $(\alpha)$ và $(\beta)$, đường thẳng $d$ song song với ($\alpha$). Có bao nhiêu vị trí tương đối của $d$ và $(\beta)$?</div></div><div class="options"><label><input type="radio" name="P1_Cau_3" value="A"> <b>A.</b> $3$</label><label><input type="radio" name="P1_Cau_3" value="B"> <b>B.</b> $1$</label><label><input type="radio" name="P1_Cau_3" value="C"> <b>C.</b> $2$</label><label><input type="radio" name="P1_Cau_3" value="D"> <b>D.</b> $4$</label></div><div class="solution-box"><div class="tp"><b>Lời giải chi tiết:</b> Ta có $\left\{\begin{aligned}&amp;(\alpha)\parallel(\beta)\\&amp;d\parallel(\alpha)\end{aligned}\right.\Rightarrow\left[\begin{aligned}&amp;d\subset(\beta)\\&amp;d\not\subset(\beta).\end{aligned}\right.$<br> Vậy có $2$ vị trí tương đối của $d$ và $(\beta)$.</div></div></div>
+<div class="question"><div class="question-text"><div class="tp"><b>Câu 4:</b> Khảo sát thời gian tập thể dục của một số học sinh khối 11 thu được mẫu số liệu ghép nhóm sau: <div class="center"><div class="tp"><div class="table-responsive"><table class="tex-table bordered"><tr><td style="text-align:center">Thời gian (phút)</td><td style="text-align:center">$[0;20)$</td><td style="text-align:center">$[20;40)$</td><td style="text-align:center">$[40;60)$</td><td style="text-align:center">$[60;80)$</td><td style="text-align:center">$[80;100)$</td></tr><tr><td style="text-align:center">Số học sinh</td><td style="text-align:center">$5$</td><td style="text-align:center">$9$</td><td style="text-align:center">$12$</td><td style="text-align:center">$10$</td><td style="text-align:center">$6$</td></tr></table></div></div></div> Nhóm chứa tứ phân vị thứ nhất của mẫu số liệu trên là</div></div><div class="options"><label><input type="radio" name="P1_Cau_4" value="A"> <b>A.</b> $[40;60)$</label><label><input type="radio" name="P1_Cau_4" value="B"> <b>B.</b> $[80;100)$</label><label><input type="radio" name="P1_Cau_4" value="C"> <b>C.</b> $[20;40)$</label><label><input type="radio" name="P1_Cau_4" value="D"> <b>D.</b> $[60;80)$</label></div><div class="solution-box"><div class="tp"><b>Lời giải chi tiết:</b> Tổng số học sinh của mẫu số liệu là $n=5+9+12+10+6=42$.<br> Khi đó $\dfrac{n}{4}=\dfrac{42}{4}=10{,}5$.<br> Do đó nhóm chứa tứ phân vị thứ nhất là $[20;40)$.</div></div></div>
+<div class="question"><div class="question-text"><div class="tp"><b>Câu 5:</b> $\lim\limits_{x \to +\infty} \dfrac{2x^2 - 1}{x^2 + x}$ bằng</div></div><div class="options"><label><input type="radio" name="P1_Cau_5" value="A"> <b>A.</b> $2$</label><label><input type="radio" name="P1_Cau_5" value="B"> <b>B.</b> $1$</label><label><input type="radio" name="P1_Cau_5" value="C"> <b>C.</b> $0$</label><label><input type="radio" name="P1_Cau_5" value="D"> <b>D.</b> $-1$</label></div><div class="solution-box"><div class="tp"><b>Lời giải chi tiết:</b> Ta có $\lim\limits_{x \to +\infty} \dfrac{2x^2 - 1}{x^2 + x}=\lim\limits_{x \to +\infty} \dfrac{2-\tfrac{1}{x^2}}{1+\tfrac{1}{x}}=2$.</div></div></div>
+<div class="question"><div class="question-text"><div class="tp"><b>Câu 6:</b> Cho $u,v$ là các góc lượng giác. Tìm khẳng định đúng trong các khẳng định sau</div></div><div class="options"><label><input type="radio" name="P1_Cau_6" value="A"> <b>A.</b> $\sin(u+v)=\sin u\cos v-\cos u\sin v$</label><label><input type="radio" name="P1_Cau_6" value="B"> <b>B.</b> $\tan(u-v)=\tan u-\tan v$</label><label><input type="radio" name="P1_Cau_6" value="C"> <b>C.</b> $\sin(u-v)=\sin u\cos v-\cos u\sin v$</label><label><input type="radio" name="P1_Cau_6" value="D"> <b>D.</b> $\cos(u-v)=\cos u-\cos v$</label></div><div class="solution-box"><div class="tp"><b>Lời giải chi tiết:</b> $\sin(u-v)=\sin u\cos v-\cos u\sin v$</div></div></div>
+<div class="question"><div class="question-text"><div class="tp"><b>Câu 7:</b> Một tam giác có số đo các góc lập thành cấp số nhân có công bội $q=2$. Số đo các góc của tam giác lần lượt là</div></div><div class="options"><label><input type="radio" name="P1_Cau_7" value="A"> <b>A.</b> $\dfrac{\pi}{7},\dfrac{2\pi}{7},\dfrac{4\pi}{7}$</label><label><input type="radio" name="P1_Cau_7" value="B"> <b>B.</b> $\dfrac{\pi}{6},\dfrac{2\pi}{6},\dfrac{4\pi}{6}$</label><label><input type="radio" name="P1_Cau_7" value="C"> <b>C.</b> $\dfrac{\pi}{5},\dfrac{2\pi}{5},\dfrac{4\pi}{5}$</label><label><input type="radio" name="P1_Cau_7" value="D"> <b>D.</b> $\dfrac{\pi}{3},\dfrac{\pi}{3},\dfrac{\pi}{2}$</label></div><div class="solution-box"><div class="tp"><b>Lời giải chi tiết:</b> Gọi $x$ là số đo của góc bé nhất. Khi đó số đo các góc lần lượt là $x$, $2x$, $4x$.<br> Ta có $x+2x+4x=\pi\Leftrightarrow 7x=\pi\Leftrightarrow x=\dfrac{\pi}{7}$.<br> Do đó số đo các góc lần lượt là $\dfrac{\pi}{7}$, $\dfrac{2\pi}{7}$, $\dfrac{4\pi}{7}$.</div></div></div>
+<div class="question"><div class="question-text"><div class="tp"><b>Câu 8:</b> Một hình chóp có đáy là ngũ giác có số mặt và số cạnh lần lượt là</div></div><div class="options"><label><input type="radio" name="P1_Cau_8" value="A"> <b>A.</b> $5$ mặt, $5$ cạnh</label><label><input type="radio" name="P1_Cau_8" value="B"> <b>B.</b> $6$ mặt, $5$ cạnh</label><label><input type="radio" name="P1_Cau_8" value="C"> <b>C.</b> $6$ mặt, $10$ cạnh</label><label><input type="radio" name="P1_Cau_8" value="D"> <b>D.</b> $5$ mặt, $10$ cạnh</label></div><div class="solution-box"><div class="tp"><b>Lời giải chi tiết:</b> Một hình chóp có đáy là ngũ giác có số mặt và số cạnh lần lượt là $6$ mặt, $10$ cạnh.</div><div class="tp"><div class="center"><div class="tp"><div class="table-responsive figure" style="text-align:center;margin:10px 0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="126.416pt" height="143.285pt" viewBox="0 0 126.416 143.285" version="1.2">
+<defs>
+<g>
+<symbol overflow="visible" id="f1_glyph0-0">
+<path style="stroke:none;" d=""/>
+</symbol>
+<symbol overflow="visible" id="f1_glyph0-1">
+<path style="stroke:none;" d="M 1.46875 -0.9375 C 1.109375 -0.359375 0.78125 -0.28125 0.484375 -0.265625 C 0.40625 -0.25 0.3125 -0.25 0.3125 -0.109375 C 0.3125 -0.09375 0.328125 0 0.421875 0 C 0.5 0 0.546875 -0.03125 1.109375 -0.03125 C 1.640625 -0.03125 1.828125 0 1.859375 0 C 1.90625 0 2.03125 0 2.03125 -0.15625 C 2.03125 -0.25 1.921875 -0.265625 1.875 -0.265625 C 1.71875 -0.265625 1.546875 -0.328125 1.546875 -0.515625 C 1.546875 -0.625 1.609375 -0.734375 1.765625 -0.953125 L 2.296875 -1.828125 L 4.484375 -1.828125 L 4.640625 -0.484375 C 4.640625 -0.375 4.5 -0.265625 4.125 -0.265625 C 4.015625 -0.265625 3.90625 -0.265625 3.90625 -0.109375 C 3.90625 -0.109375 3.90625 0 4.046875 0 C 4.125 0 4.421875 -0.015625 4.5 -0.03125 L 5 -0.03125 C 5.703125 -0.03125 5.84375 0 5.90625 0 C 5.9375 0 6.0625 0 6.0625 -0.15625 C 6.0625 -0.265625 5.96875 -0.265625 5.828125 -0.265625 C 5.390625 -0.265625 5.390625 -0.328125 5.359375 -0.53125 L 4.734375 -5.4375 C 4.71875 -5.609375 4.703125 -5.671875 4.578125 -5.671875 C 4.421875 -5.671875 4.375 -5.59375 4.328125 -5.515625 Z M 2.46875 -2.09375 L 4.109375 -4.703125 L 4.4375 -2.09375 Z M 2.46875 -2.09375 "/>
+</symbol>
+<symbol overflow="visible" id="f1_glyph0-2">
+<path style="stroke:none;" d="M 5.9375 -1.84375 C 5.96875 -1.875 5.984375 -1.921875 5.984375 -1.953125 C 5.984375 -1.96875 5.96875 -2.0625 5.859375 -2.0625 C 5.765625 -2.0625 5.765625 -2.046875 5.6875 -1.859375 C 5.171875 -0.703125 4.796875 -0.265625 3.515625 -0.265625 L 2.0625 -0.265625 C 2 -0.28125 1.96875 -0.28125 1.96875 -0.328125 C 1.96875 -0.390625 1.984375 -0.453125 2 -0.515625 L 2.546875 -2.671875 L 3.390625 -2.671875 C 3.984375 -2.671875 4.09375 -2.578125 4.09375 -2.328125 C 4.09375 -2.3125 4.09375 -2.1875 4.046875 -1.96875 C 4.03125 -1.921875 4.015625 -1.875 4.015625 -1.859375 C 4.015625 -1.84375 4.03125 -1.75 4.140625 -1.75 C 4.234375 -1.75 4.25 -1.796875 4.28125 -1.921875 L 4.703125 -3.59375 C 4.703125 -3.609375 4.734375 -3.734375 4.734375 -3.75 C 4.734375 -3.828125 4.671875 -3.859375 4.609375 -3.859375 C 4.515625 -3.859375 4.5 -3.8125 4.453125 -3.671875 C 4.296875 -3.0625 4.09375 -2.9375 3.40625 -2.9375 L 2.609375 -2.9375 L 3.09375 -4.828125 C 3.15625 -5.125 3.171875 -5.140625 3.5 -5.140625 L 4.734375 -5.140625 C 5.6875 -5.140625 5.984375 -4.9375 5.984375 -4.25 C 5.984375 -4.078125 5.9375 -3.875 5.9375 -3.734375 C 5.9375 -3.640625 6 -3.59375 6.0625 -3.59375 C 6.171875 -3.59375 6.1875 -3.671875 6.203125 -3.796875 L 6.34375 -5.15625 C 6.34375 -5.1875 6.34375 -5.25 6.34375 -5.28125 C 6.34375 -5.390625 6.25 -5.390625 6.109375 -5.390625 L 1.921875 -5.390625 C 1.78125 -5.390625 1.6875 -5.390625 1.6875 -5.25 C 1.6875 -5.140625 1.78125 -5.140625 1.921875 -5.140625 C 1.9375 -5.140625 2.09375 -5.140625 2.21875 -5.125 C 2.390625 -5.109375 2.40625 -5.078125 2.40625 -5.015625 C 2.40625 -4.96875 2.390625 -4.921875 2.375 -4.875 L 1.3125 -0.625 C 1.25 -0.328125 1.234375 -0.265625 0.640625 -0.265625 C 0.484375 -0.265625 0.390625 -0.265625 0.390625 -0.109375 C 0.390625 0 0.5 0 0.640625 0 L 4.921875 0 C 5.125 0 5.140625 0 5.203125 -0.140625 Z M 5.9375 -1.84375 "/>
+</symbol>
+<symbol overflow="visible" id="f1_glyph0-3">
+<path style="stroke:none;" d="M 1.34375 -0.625 C 1.265625 -0.328125 1.25 -0.265625 0.671875 -0.265625 C 0.515625 -0.265625 0.421875 -0.265625 0.421875 -0.109375 C 0.421875 0 0.53125 0 0.65625 0 L 3.609375 0 C 4.90625 0 5.890625 -0.921875 5.890625 -1.703125 C 5.890625 -2.28125 5.390625 -2.75 4.59375 -2.828125 C 5.515625 -3.015625 6.3125 -3.609375 6.3125 -4.3125 C 6.3125 -4.90625 5.734375 -5.421875 4.734375 -5.421875 L 1.953125 -5.421875 C 1.8125 -5.421875 1.71875 -5.421875 1.71875 -5.265625 C 1.71875 -5.15625 1.8125 -5.15625 1.9375 -5.15625 C 2.203125 -5.15625 2.4375 -5.15625 2.4375 -5.03125 C 2.4375 -5 2.421875 -5 2.40625 -4.890625 Z M 2.578125 -2.921875 L 3.0625 -4.859375 C 3.140625 -5.140625 3.140625 -5.15625 3.46875 -5.15625 L 4.609375 -5.15625 C 5.390625 -5.15625 5.5625 -4.65625 5.5625 -4.328125 C 5.5625 -3.65625 4.84375 -2.921875 3.828125 -2.921875 Z M 2.03125 -0.265625 C 1.953125 -0.28125 1.9375 -0.28125 1.9375 -0.328125 C 1.9375 -0.390625 1.953125 -0.453125 1.96875 -0.515625 L 2.53125 -2.703125 L 4.140625 -2.703125 C 4.875 -2.703125 5.125 -2.203125 5.125 -1.765625 C 5.125 -0.984375 4.359375 -0.265625 3.40625 -0.265625 Z M 2.03125 -0.265625 "/>
+</symbol>
+<symbol overflow="visible" id="f1_glyph0-4">
+<path style="stroke:none;" d="M 6.3125 -5.375 C 6.328125 -5.40625 6.34375 -5.453125 6.34375 -5.5 C 6.34375 -5.546875 6.296875 -5.59375 6.234375 -5.59375 C 6.1875 -5.59375 6.15625 -5.5625 6.09375 -5.5 L 5.546875 -4.875 C 5.46875 -4.984375 5.046875 -5.59375 4.125 -5.59375 C 2.28125 -5.59375 0.421875 -3.875 0.421875 -2.0625 C 0.421875 -0.671875 1.46875 0.171875 2.734375 0.171875 C 3.765625 0.171875 4.65625 -0.46875 5.078125 -1.09375 C 5.34375 -1.46875 5.4375 -1.859375 5.4375 -1.90625 C 5.4375 -1.96875 5.390625 -2.015625 5.328125 -2.015625 C 5.234375 -2.015625 5.21875 -1.96875 5.1875 -1.875 C 4.859375 -0.78125 3.78125 -0.09375 2.828125 -0.09375 C 2.03125 -0.09375 1.171875 -0.578125 1.171875 -1.78125 C 1.171875 -2.046875 1.265625 -3.359375 2.140625 -4.359375 C 2.734375 -5.03125 3.546875 -5.328125 4.171875 -5.328125 C 5.171875 -5.328125 5.59375 -4.53125 5.59375 -3.765625 C 5.59375 -3.65625 5.5625 -3.515625 5.5625 -3.40625 C 5.5625 -3.3125 5.65625 -3.3125 5.6875 -3.3125 C 5.796875 -3.3125 5.8125 -3.34375 5.84375 -3.484375 Z M 6.3125 -5.375 "/>
+</symbol>
+<symbol overflow="visible" id="f1_glyph0-5">
+<path style="stroke:none;" d="M 1.328125 -0.625 C 1.25 -0.328125 1.234375 -0.265625 0.65625 -0.265625 C 0.5 -0.265625 0.40625 -0.265625 0.40625 -0.109375 C 0.40625 0 0.515625 0 0.640625 0 L 3.375 0 C 5.046875 0 6.71875 -1.609375 6.71875 -3.375 C 6.71875 -4.59375 5.90625 -5.421875 4.71875 -5.421875 L 1.9375 -5.421875 C 1.796875 -5.421875 1.703125 -5.421875 1.703125 -5.265625 C 1.703125 -5.15625 1.796875 -5.15625 1.921875 -5.15625 C 2.1875 -5.15625 2.421875 -5.15625 2.421875 -5.03125 C 2.421875 -5 2.40625 -5 2.390625 -4.890625 Z M 3.078125 -4.859375 C 3.15625 -5.140625 3.15625 -5.15625 3.484375 -5.15625 L 4.4375 -5.15625 C 5.375 -5.15625 6 -4.625 6 -3.65625 C 6 -3.390625 5.890625 -2.109375 5.203125 -1.21875 C 4.84375 -0.765625 4.171875 -0.265625 3.234375 -0.265625 L 2.046875 -0.265625 C 1.96875 -0.28125 1.953125 -0.28125 1.953125 -0.328125 C 1.953125 -0.390625 1.96875 -0.453125 1.984375 -0.515625 Z M 3.078125 -4.859375 "/>
+</symbol>
+<symbol overflow="visible" id="f1_glyph0-6">
+<path style="stroke:none;" d="M 5.328125 -5.375 C 5.328125 -5.40625 5.34375 -5.453125 5.34375 -5.5 C 5.34375 -5.546875 5.296875 -5.59375 5.25 -5.59375 C 5.1875 -5.59375 5.171875 -5.578125 5.09375 -5.484375 C 5 -5.375 4.796875 -5.125 4.703125 -5.03125 C 4.390625 -5.484375 3.890625 -5.59375 3.5 -5.59375 C 2.390625 -5.59375 1.4375 -4.65625 1.4375 -3.75 C 1.4375 -3.296875 1.6875 -3.03125 1.734375 -2.96875 C 2 -2.6875 2.21875 -2.625 2.796875 -2.5 C 3.078125 -2.421875 3.09375 -2.421875 3.3125 -2.359375 C 3.546875 -2.3125 4.0625 -2.1875 4.0625 -1.53125 C 4.0625 -0.828125 3.375 -0.09375 2.546875 -0.09375 C 2.03125 -0.09375 1.078125 -0.25 1.078125 -1.234375 C 1.078125 -1.265625 1.078125 -1.421875 1.125 -1.625 L 1.140625 -1.703125 C 1.140625 -1.796875 1.046875 -1.796875 1.015625 -1.796875 C 0.90625 -1.796875 0.90625 -1.765625 0.859375 -1.59375 L 0.546875 -0.296875 C 0.515625 -0.171875 0.453125 0.046875 0.453125 0.0625 C 0.453125 0.125 0.5 0.171875 0.5625 0.171875 C 0.609375 0.171875 0.625 0.15625 0.703125 0.0625 L 1.09375 -0.390625 C 1.265625 -0.15625 1.71875 0.171875 2.53125 0.171875 C 3.671875 0.171875 4.625 -0.875 4.625 -1.828125 C 4.625 -2.1875 4.5 -2.46875 4.28125 -2.703125 C 4.046875 -2.953125 3.78125 -3.03125 3.40625 -3.125 C 3.1875 -3.171875 2.875 -3.25 2.6875 -3.296875 C 2.453125 -3.34375 2.015625 -3.515625 2.015625 -4.0625 C 2.015625 -4.6875 2.671875 -5.34375 3.484375 -5.34375 C 4.203125 -5.34375 4.6875 -4.984375 4.6875 -4.125 C 4.6875 -3.921875 4.65625 -3.765625 4.65625 -3.734375 C 4.65625 -3.640625 4.734375 -3.625 4.78125 -3.625 C 4.875 -3.625 4.890625 -3.65625 4.921875 -3.78125 Z M 5.328125 -5.375 "/>
+</symbol>
+</g>
+</defs>
+<g id="f1_surface1">
+<path style="fill:none;stroke-width:0.3985;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-dasharray:2.98883,2.98883;stroke-miterlimit:10;" d="M -0.00106065 0.0010096 L 28.228953 23.688939 L 92.128262 0.0010096 M 23.843899 88.989738 L 28.228953 23.688939 " transform="matrix(0.995035,0,0,-0.995035,16.973712,105.051786)"/>
+<path style="fill:none;stroke-width:0.3985;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -0.00106065 0.0010096 L 17.645151 -14.802965 L 60.600625 -22.057737 L 92.128262 0.0010096 L 23.843899 88.989738 L -0.00106065 0.0010096 M 23.843899 88.989738 L 17.645151 -14.802965 M 23.843899 88.989738 L 60.600625 -22.057737 " transform="matrix(0.995035,0,0,-0.995035,16.973712,105.051786)"/>
+<path style="fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;stroke-width:0.3985;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 0.646687 0.0010096 C 0.646687 0.358252 0.356182 0.648757 -0.00106065 0.648757 C -0.358303 0.648757 -0.648808 0.358252 -0.648808 0.0010096 C -0.648808 -0.356233 -0.358303 -0.646738 -0.00106065 -0.646738 C 0.356182 -0.646738 0.646687 -0.356233 0.646687 0.0010096 Z M 0.646687 0.0010096 " transform="matrix(0.995035,0,0,-0.995035,16.973712,105.051786)"/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f1_glyph0-1" x="6.878089" y="107.761265"/>
+</g>
+<path style="fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;stroke-width:0.3985;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 28.8767 23.688939 C 28.8767 24.046182 28.586196 24.336687 28.228953 24.336687 C 27.87171 24.336687 27.581205 24.046182 27.581205 23.688939 C 27.581205 23.331697 27.87171 23.041192 28.228953 23.041192 C 28.586196 23.041192 28.8767 23.331697 28.8767 23.688939 Z M 28.8767 23.688939 " transform="matrix(0.995035,0,0,-0.995035,16.973712,105.051786)"/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f1_glyph0-2" x="41.752066" y="91.13125"/>
+</g>
+<path style="fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;stroke-width:0.3985;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 92.77601 0.0010096 C 92.77601 0.358252 92.485505 0.648757 92.128262 0.648757 C 91.771019 0.648757 91.480515 0.358252 91.480515 0.0010096 C 91.480515 -0.356233 91.771019 -0.646738 92.128262 -0.646738 C 92.485505 -0.646738 92.77601 -0.356233 92.77601 0.0010096 Z M 92.77601 0.0010096 " transform="matrix(0.995035,0,0,-0.995035,16.973712,105.051786)"/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f1_glyph0-3" x="112.210475" y="107.761265"/>
+</g>
+<path style="fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;stroke-width:0.3985;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 61.248372 -22.057737 C 61.248372 -21.700494 60.957867 -21.409989 60.600625 -21.409989 C 60.243382 -21.409989 59.952877 -21.700494 59.952877 -22.057737 C 59.952877 -22.41498 60.243382 -22.705484 60.600625 -22.705484 C 60.957867 -22.705484 61.248372 -22.41498 61.248372 -22.057737 Z M 61.248372 -22.057737 " transform="matrix(0.995035,0,0,-0.995035,16.973712,105.051786)"/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f1_glyph0-4" x="77.459882" y="135.718756"/>
+</g>
+<path style="fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;stroke-width:0.3985;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 18.292899 -14.802965 C 18.292899 -14.445722 18.002394 -14.159143 17.645151 -14.159143 C 17.283983 -14.159143 16.997404 -14.445722 16.997404 -14.802965 C 16.997404 -15.164133 17.283983 -15.450712 17.645151 -15.450712 C 18.002394 -15.450712 18.292899 -15.164133 18.292899 -14.802965 Z M 18.292899 -14.802965 " transform="matrix(0.995035,0,0,-0.995035,16.973712,105.051786)"/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f1_glyph0-5" x="29.750953" y="129.326653"/>
+</g>
+<path style="fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;stroke-width:0.3985;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 24.491646 88.989738 C 24.491646 89.346981 24.201141 89.637486 23.843899 89.637486 C 23.486656 89.637486 23.196151 89.346981 23.196151 88.989738 C 23.196151 88.632496 23.486656 88.341991 23.843899 88.341991 C 24.201141 88.341991 24.491646 88.632496 24.491646 88.989738 Z M 24.491646 88.989738 " transform="matrix(0.995035,0,0,-0.995035,16.973712,105.051786)"/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f1_glyph0-6" x="37.915212" y="12.274748"/>
+</g>
+</g>
+</svg></div></div></div></div></div></div>
+<div class="question"><div class="question-text"><div class="tp"><b>Câu 9:</b> Cho hình chóp tứ giác $S.ABCD$. Giao tuyến của hai mặt phẳng $(SAB)$ và $(SBC)$ là</div></div><div class="options"><label><input type="radio" name="P1_Cau_9" value="A"> <b>A.</b> $SB$</label><label><input type="radio" name="P1_Cau_9" value="B"> <b>B.</b> $SA$</label><label><input type="radio" name="P1_Cau_9" value="C"> <b>C.</b> $AC$</label><label><input type="radio" name="P1_Cau_9" value="D"> <b>D.</b> $SC$</label></div><div class="solution-box"><div class="tp"><b>Lời giải chi tiết:</b> <div class="center"><div class="tp"><div class="table-responsive figure" style="text-align:center;margin:10px 0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="148.776pt" height="158.206pt" viewBox="0 0 148.776 158.206" version="1.2">
+<defs>
+<g>
+<symbol overflow="visible" id="f2_glyph0-0">
+<path style="stroke:none;" d=""/>
+</symbol>
+<symbol overflow="visible" id="f2_glyph0-1">
+<path style="stroke:none;" d="M 1.765625 -1.140625 C 1.375 -0.46875 0.984375 -0.34375 0.5625 -0.3125 C 0.4375 -0.296875 0.34375 -0.296875 0.34375 -0.109375 C 0.34375 -0.046875 0.390625 0 0.46875 0 C 0.75 0 1.046875 -0.03125 1.328125 -0.03125 C 1.65625 -0.03125 2 0 2.3125 0 C 2.375 0 2.5 0 2.5 -0.1875 C 2.5 -0.296875 2.421875 -0.3125 2.34375 -0.3125 C 2.125 -0.328125 1.875 -0.40625 1.875 -0.65625 C 1.875 -0.765625 1.9375 -0.875 2.015625 -1.015625 L 2.78125 -2.28125 L 5.265625 -2.28125 C 5.28125 -2.078125 5.421875 -0.734375 5.421875 -0.640625 C 5.421875 -0.34375 4.90625 -0.3125 4.703125 -0.3125 C 4.5625 -0.3125 4.46875 -0.3125 4.46875 -0.109375 C 4.46875 0 4.59375 0 4.609375 0 C 5.015625 0 5.4375 -0.03125 5.84375 -0.03125 C 6.09375 -0.03125 6.71875 0 6.96875 0 C 7.03125 0 7.140625 0 7.140625 -0.203125 C 7.140625 -0.3125 7.046875 -0.3125 6.921875 -0.3125 C 6.296875 -0.3125 6.296875 -0.375 6.265625 -0.65625 L 5.671875 -6.859375 C 5.640625 -7.046875 5.640625 -7.09375 5.484375 -7.09375 C 5.3125 -7.09375 5.28125 -7.03125 5.21875 -6.921875 Z M 2.96875 -2.59375 L 4.90625 -5.859375 L 5.234375 -2.59375 Z M 2.96875 -2.59375 "/>
+</symbol>
+<symbol overflow="visible" id="f2_glyph0-2">
+<path style="stroke:none;" d="M 1.578125 -0.765625 C 1.484375 -0.390625 1.46875 -0.3125 0.6875 -0.3125 C 0.515625 -0.3125 0.421875 -0.3125 0.421875 -0.109375 C 0.421875 0 0.5 0 0.6875 0 L 4.21875 0 C 5.78125 0 6.953125 -1.171875 6.953125 -2.140625 C 6.953125 -2.859375 6.375 -3.421875 5.421875 -3.53125 C 6.453125 -3.71875 7.484375 -4.453125 7.484375 -5.40625 C 7.484375 -6.125 6.828125 -6.765625 5.640625 -6.765625 L 2.3125 -6.765625 C 2.125 -6.765625 2.03125 -6.765625 2.03125 -6.5625 C 2.03125 -6.453125 2.125 -6.453125 2.3125 -6.453125 C 2.328125 -6.453125 2.515625 -6.453125 2.6875 -6.4375 C 2.859375 -6.421875 2.953125 -6.40625 2.953125 -6.28125 C 2.953125 -6.234375 2.9375 -6.21875 2.90625 -6.09375 Z M 3.078125 -3.625 L 3.6875 -6.078125 C 3.78125 -6.421875 3.796875 -6.453125 4.234375 -6.453125 L 5.515625 -6.453125 C 6.375 -6.453125 6.59375 -5.875 6.59375 -5.4375 C 6.59375 -4.5625 5.734375 -3.625 4.53125 -3.625 Z M 2.640625 -0.3125 C 2.5 -0.3125 2.484375 -0.3125 2.421875 -0.3125 C 2.3125 -0.328125 2.28125 -0.34375 2.28125 -0.421875 C 2.28125 -0.453125 2.28125 -0.46875 2.34375 -0.640625 L 3.015625 -3.40625 L 4.890625 -3.40625 C 5.84375 -3.40625 6.03125 -2.671875 6.03125 -2.25 C 6.03125 -1.265625 5.15625 -0.3125 3.984375 -0.3125 Z M 2.640625 -0.3125 "/>
+</symbol>
+<symbol overflow="visible" id="f2_glyph0-3">
+<path style="stroke:none;" d="M 7.53125 -6.890625 C 7.53125 -6.921875 7.515625 -6.984375 7.421875 -6.984375 C 7.390625 -6.984375 7.375 -6.96875 7.265625 -6.859375 L 6.578125 -6.109375 C 6.484375 -6.234375 6.03125 -6.984375 4.9375 -6.984375 C 2.71875 -6.984375 0.5 -4.796875 0.5 -2.5 C 0.5 -0.859375 1.671875 0.21875 3.1875 0.21875 C 4.046875 0.21875 4.796875 -0.171875 5.3125 -0.640625 C 6.234375 -1.453125 6.40625 -2.34375 6.40625 -2.375 C 6.40625 -2.484375 6.3125 -2.484375 6.296875 -2.484375 C 6.234375 -2.484375 6.1875 -2.453125 6.15625 -2.375 C 6.078125 -2.09375 5.84375 -1.390625 5.15625 -0.8125 C 4.484375 -0.25 3.859375 -0.09375 3.34375 -0.09375 C 2.453125 -0.09375 1.390625 -0.609375 1.390625 -2.15625 C 1.390625 -2.71875 1.609375 -4.3125 2.59375 -5.484375 C 3.203125 -6.1875 4.125 -6.671875 5.015625 -6.671875 C 6.015625 -6.671875 6.609375 -5.90625 6.609375 -4.765625 C 6.609375 -4.375 6.578125 -4.359375 6.578125 -4.265625 C 6.578125 -4.15625 6.6875 -4.15625 6.71875 -4.15625 C 6.859375 -4.15625 6.859375 -4.1875 6.90625 -4.359375 Z M 7.53125 -6.890625 "/>
+</symbol>
+<symbol overflow="visible" id="f2_glyph0-4">
+<path style="stroke:none;" d="M 1.578125 -0.765625 C 1.46875 -0.390625 1.453125 -0.3125 0.671875 -0.3125 C 0.5 -0.3125 0.390625 -0.3125 0.390625 -0.125 C 0.390625 0 0.484375 0 0.671875 0 L 3.953125 0 C 6.015625 0 7.96875 -2.09375 7.96875 -4.265625 C 7.96875 -5.65625 7.125 -6.765625 5.640625 -6.765625 L 2.3125 -6.765625 C 2.125 -6.765625 2.015625 -6.765625 2.015625 -6.578125 C 2.015625 -6.453125 2.09375 -6.453125 2.296875 -6.453125 C 2.421875 -6.453125 2.609375 -6.453125 2.71875 -6.4375 C 2.875 -6.421875 2.9375 -6.390625 2.9375 -6.28125 C 2.9375 -6.234375 2.9375 -6.21875 2.90625 -6.09375 Z M 3.71875 -6.078125 C 3.796875 -6.421875 3.828125 -6.453125 4.25 -6.453125 L 5.3125 -6.453125 C 6.28125 -6.453125 7.109375 -5.9375 7.109375 -4.625 C 7.109375 -4.140625 6.90625 -2.515625 6.0625 -1.421875 C 5.78125 -1.0625 5 -0.3125 3.78125 -0.3125 L 2.65625 -0.3125 C 2.515625 -0.3125 2.5 -0.3125 2.4375 -0.3125 C 2.34375 -0.328125 2.3125 -0.34375 2.3125 -0.421875 C 2.3125 -0.453125 2.3125 -0.46875 2.359375 -0.640625 Z M 3.71875 -6.078125 "/>
+</symbol>
+<symbol overflow="visible" id="f2_glyph0-5">
+<path style="stroke:none;" d="M 6.390625 -6.890625 C 6.390625 -6.921875 6.375 -6.984375 6.28125 -6.984375 C 6.234375 -6.984375 6.21875 -6.96875 6.109375 -6.828125 L 5.625 -6.265625 C 5.375 -6.734375 4.859375 -6.984375 4.203125 -6.984375 C 2.953125 -6.984375 1.765625 -5.84375 1.765625 -4.640625 C 1.765625 -3.84375 2.28125 -3.390625 2.796875 -3.234375 L 3.859375 -2.96875 C 4.21875 -2.875 4.765625 -2.71875 4.765625 -1.90625 C 4.765625 -1.015625 3.953125 -0.09375 2.984375 -0.09375 C 2.34375 -0.09375 1.25 -0.3125 1.25 -1.53125 C 1.25 -1.765625 1.296875 -2.015625 1.3125 -2.078125 C 1.3125 -2.109375 1.328125 -2.125 1.328125 -2.140625 C 1.328125 -2.234375 1.265625 -2.25 1.203125 -2.25 C 1.15625 -2.25 1.140625 -2.234375 1.109375 -2.203125 C 1.0625 -2.171875 0.515625 0.09375 0.515625 0.125 C 0.515625 0.171875 0.5625 0.21875 0.625 0.21875 C 0.671875 0.21875 0.6875 0.203125 0.796875 0.0625 L 1.28125 -0.5 C 1.71875 0.078125 2.390625 0.21875 2.96875 0.21875 C 4.3125 0.21875 5.484375 -1.09375 5.484375 -2.328125 C 5.484375 -3.015625 5.140625 -3.34375 5 -3.484375 C 4.765625 -3.71875 4.609375 -3.75 3.734375 -3.984375 C 3.515625 -4.046875 3.15625 -4.140625 3.078125 -4.15625 C 2.796875 -4.25 2.46875 -4.53125 2.46875 -5.0625 C 2.46875 -5.859375 3.265625 -6.703125 4.203125 -6.703125 C 5.015625 -6.703125 5.625 -6.28125 5.625 -5.171875 C 5.625 -4.859375 5.59375 -4.671875 5.59375 -4.609375 C 5.59375 -4.609375 5.59375 -4.515625 5.703125 -4.515625 C 5.8125 -4.515625 5.8125 -4.546875 5.859375 -4.71875 Z M 6.390625 -6.890625 "/>
+</symbol>
+</g>
+</defs>
+<g id="f2_surface1">
+<path style="fill:none;stroke-width:0.3985;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 22.679226 68.034903 L -0.000435739 -0.000156611 " transform="matrix(0.995006,0,0,-0.995006,17.601996,84.706875)"/>
+<path style="fill:none;stroke-width:0.3985;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 22.679226 68.034903 L 22.679226 -39.282258 " transform="matrix(0.995006,0,0,-0.995006,17.601996,84.706875)"/>
+<path style="fill:none;stroke-width:0.3985;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 22.679226 68.034903 L 88.398032 -56.889715 " transform="matrix(0.995006,0,0,-0.995006,17.601996,84.706875)"/>
+<path style="fill:none;stroke-width:0.3985;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 22.679226 68.034903 L 113.393948 -0.000156611 " transform="matrix(0.995006,0,0,-0.995006,17.601996,84.706875)"/>
+<path style="fill:none;stroke-width:0.3985;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -0.000435739 -0.000156611 L 22.679226 -39.282258 L 88.398032 -56.889715 L 113.393948 -0.000156611 " transform="matrix(0.995006,0,0,-0.995006,17.601996,84.706875)"/>
+<path style="fill:none;stroke-width:0.3985;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-dasharray:2.98883,2.98883;stroke-miterlimit:10;" d="M -0.000435739 -0.000156611 L 113.393948 -0.000156611 " transform="matrix(0.995006,0,0,-0.995006,17.601996,84.706875)"/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 18.394531 84.707031 C 18.394531 84.269531 18.039063 83.914063 17.601563 83.914063 C 17.164063 83.914063 16.808594 84.269531 16.808594 84.707031 C 16.808594 85.144531 17.164063 85.5 17.601563 85.5 C 18.039063 85.5 18.394531 85.144531 18.394531 84.707031 Z M 18.394531 84.707031 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f2_glyph0-1" x="7.11463" y="88.093877"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 40.960938 123.792969 C 40.960938 123.351563 40.605469 123 40.167969 123 C 39.730469 123 39.375 123.351563 39.375 123.792969 C 39.375 124.230469 39.730469 124.585938 40.167969 124.585938 C 40.605469 124.585938 40.960938 124.230469 40.960938 123.792969 Z M 40.960938 123.792969 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f2_glyph0-2" x="30.296286" y="130.562735"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 106.351563 141.3125 C 106.351563 140.875 105.996094 140.519531 105.558594 140.519531 C 105.121094 140.519531 104.765625 140.875 104.765625 141.3125 C 104.765625 141.75 105.121094 142.105469 105.558594 142.105469 C 105.996094 142.105469 106.351563 141.75 106.351563 141.3125 Z M 106.351563 141.3125 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f2_glyph0-3" x="105.043149" y="150.561367"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 131.222656 84.707031 C 131.222656 84.269531 130.867188 83.914063 130.429688 83.914063 C 129.992188 83.914063 129.636719 84.269531 129.636719 84.707031 C 129.636719 85.144531 129.992188 85.5 130.429688 85.5 C 130.867188 85.5 131.222656 85.144531 131.222656 84.707031 Z M 131.222656 84.707031 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f2_glyph0-4" x="132.955065" y="88.093877"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 40.960938 17.011719 C 40.960938 16.574219 40.605469 16.21875 40.167969 16.21875 C 39.730469 16.21875 39.375 16.574219 39.375 17.011719 C 39.375 17.449219 39.730469 17.804688 40.167969 17.804688 C 40.605469 17.804688 40.960938 17.449219 40.960938 17.011719 Z M 40.960938 17.011719 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f2_glyph0-5" x="36.841438" y="13.628601"/>
+</g>
+</g>
+</svg></div></div></div> Ta có $S$ và $B$ là hai điểm chung của hai mặt phẳng $(SAB)$ và $(SBC)$.<br> Suy ra giao tuyến của hai mặt phẳng $(SAD)$ và $(SBC)$ là $SB$.</div></div></div>
+<div class="question"><div class="question-text"><div class="tp"><b>Câu 10:</b> Cho hai đường thẳng phân biệt $a$ và $b$ trong không gian. Có bao nhiêu vị trí tương đối giữa $a$ và $b$?</div></div><div class="options"><label><input type="radio" name="P1_Cau_10" value="A"> <b>A.</b> $3$</label><label><input type="radio" name="P1_Cau_10" value="B"> <b>B.</b> $2$</label><label><input type="radio" name="P1_Cau_10" value="C"> <b>C.</b> $1$</label><label><input type="radio" name="P1_Cau_10" value="D"> <b>D.</b> $4$</label></div><div class="solution-box"><div class="tp"><b>Lời giải chi tiết:</b> Cho hai đường thẳng phân biệt $a$ và $b$ trong không gian, có $3$ vị trí tương đối giữa $a$ và $b$, đó là <br> <ul><li>$a$ cắt $b$.</li><li>$a$ chéo $b$.</li><li>$a\parallel b$.</li></ul></div></div></div>
+<div class="question"><div class="question-text"><div class="tp"><b>Câu 11:</b> Tính chất nào không đúng về hình lăng trụ?</div></div><div class="options"><label><input type="radio" name="P1_Cau_11" value="A"> <b>A.</b> Mặt bên là các hình bình hành</label><label><input type="radio" name="P1_Cau_11" value="B"> <b>B.</b> Các cạnh bên song song và bằng nhau</label><label><input type="radio" name="P1_Cau_11" value="C"> <b>C.</b> Đáy là hai đa giác bằng nhau</label><label><input type="radio" name="P1_Cau_11" value="D"> <b>D.</b> Các cạnh bên đồng quy tại một điểm</label></div><div class="solution-box"><div class="tp"><b>Lời giải chi tiết:</b> Vì các cạnh bên của hình lăng trụ song song và bằng nhau nên không thể đồng quy tại một điểm.</div></div></div>
+<div class="question"><div class="question-text"><div class="tp"><b>Câu 12:</b> Cho cấp số cộng $(u_n)$ có số hạng tổng quát là $u_n=-3n-7$. Tìm công sai $d$.</div></div><div class="options"><label><input type="radio" name="P1_Cau_12" value="A"> <b>A.</b> $d=-1$</label><label><input type="radio" name="P1_Cau_12" value="B"> <b>B.</b> $d=-3$</label><label><input type="radio" name="P1_Cau_12" value="C"> <b>C.</b> $d=-6$</label><label><input type="radio" name="P1_Cau_12" value="D"> <b>D.</b> $d=3$</label></div><div class="solution-box"><div class="tp"><b>Lời giải chi tiết:</b> $d=u_2-u_1=-3$.</div></div></div>
+<h3>PHẦN 2. Câu trắc nghiệm đúng sai</h3>
+<div class="question"><div class="question-text"><div class="tp"><b>Câu 1:</b> Cho lăng trụ tam giác $ABC.A'B'C'$. Gọi $M$ và $M'$ lần lượt là trung điểm của các cạnh $BC$ và $B'C'$.</div></div><div class="options"><div class="table-responsive"><table class="tf-table"><tr><td><b>a.</b> Giao tuyến của hai mặt phẳng $\left(AB'C'\right)$ và $\left(A'BC\right)$ đi qua giao điểm của hai đường thẳng $AM'$ và $A'M$</td><td style="width: 120px;"><div class="tf-radio-group"><label><input type="radio" name="P2_Cau_1_a" value="Đúng"> Đ</label><label><input type="radio" name="P2_Cau_1_a" value="Sai"> S</label></div></td></tr><tr><td><b>b.</b> $AM\parallel A'M'$</td><td style="width: 120px;"><div class="tf-radio-group"><label><input type="radio" name="P2_Cau_1_b" value="Đúng"> Đ</label><label><input type="radio" name="P2_Cau_1_b" value="Sai"> S</label></div></td></tr><tr><td><b>c.</b> Hai mặt đáy của hình lăng trụ nằm trên hai mặt phẳng song song</td><td style="width: 120px;"><div class="tf-radio-group"><label><input type="radio" name="P2_Cau_1_c" value="Đúng"> Đ</label><label><input type="radio" name="P2_Cau_1_c" value="Sai"> S</label></div></td></tr><tr><td><b>d.</b> Điểm $A'$ là hình chiếu của điểm $M$ trên mặt phẳng $\left(A'B'C'\right)$ theo phương $CB'$</td><td style="width: 120px;"><div class="tf-radio-group"><label><input type="radio" name="P2_Cau_1_d" value="Đúng"> Đ</label><label><input type="radio" name="P2_Cau_1_d" value="Sai"> S</label></div></td></tr></table></div></div><div class="solution-box"><div class="tp"><b>Lời giải chi tiết:</b> <div class="center"><div class="tp"><div class="table-responsive figure" style="text-align:center;margin:10px 0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="191.205pt" height="194.406pt" viewBox="0 0 191.205 194.406" version="1.2">
+<defs>
+<g>
+<symbol overflow="visible" id="f3_glyph0-0">
+<path style="stroke:none;" d=""/>
+</symbol>
+<symbol overflow="visible" id="f3_glyph0-1">
+<path style="stroke:none;" d="M 1.78125 -1.140625 C 1.375 -0.46875 0.984375 -0.34375 0.5625 -0.3125 C 0.4375 -0.296875 0.34375 -0.296875 0.34375 -0.109375 C 0.34375 -0.046875 0.390625 0 0.46875 0 C 0.75 0 1.046875 -0.03125 1.328125 -0.03125 C 1.65625 -0.03125 2 0 2.328125 0 C 2.375 0 2.515625 0 2.515625 -0.1875 C 2.515625 -0.296875 2.421875 -0.3125 2.34375 -0.3125 C 2.125 -0.328125 1.890625 -0.40625 1.890625 -0.65625 C 1.890625 -0.78125 1.9375 -0.890625 2.03125 -1.015625 L 2.78125 -2.296875 L 5.265625 -2.296875 C 5.28125 -2.078125 5.421875 -0.734375 5.421875 -0.640625 C 5.421875 -0.34375 4.90625 -0.3125 4.71875 -0.3125 C 4.578125 -0.3125 4.46875 -0.3125 4.46875 -0.109375 C 4.46875 0 4.59375 0 4.609375 0 C 5.015625 0 5.453125 -0.03125 5.859375 -0.03125 C 6.109375 -0.03125 6.734375 0 6.96875 0 C 7.03125 0 7.15625 0 7.15625 -0.203125 C 7.15625 -0.3125 7.046875 -0.3125 6.921875 -0.3125 C 6.3125 -0.3125 6.3125 -0.375 6.28125 -0.671875 L 5.671875 -6.859375 C 5.65625 -7.0625 5.65625 -7.109375 5.484375 -7.109375 C 5.328125 -7.109375 5.28125 -7.03125 5.234375 -6.9375 Z M 2.96875 -2.59375 L 4.921875 -5.875 L 5.234375 -2.59375 Z M 2.96875 -2.59375 "/>
+</symbol>
+<symbol overflow="visible" id="f3_glyph0-2">
+<path style="stroke:none;" d="M 1.59375 -0.78125 C 1.484375 -0.390625 1.46875 -0.3125 0.6875 -0.3125 C 0.515625 -0.3125 0.421875 -0.3125 0.421875 -0.109375 C 0.421875 0 0.5 0 0.6875 0 L 4.234375 0 C 5.796875 0 6.96875 -1.171875 6.96875 -2.140625 C 6.96875 -2.859375 6.390625 -3.4375 5.421875 -3.546875 C 6.453125 -3.734375 7.5 -4.46875 7.5 -5.40625 C 7.5 -6.140625 6.84375 -6.78125 5.65625 -6.78125 L 2.328125 -6.78125 C 2.140625 -6.78125 2.03125 -6.78125 2.03125 -6.578125 C 2.03125 -6.46875 2.125 -6.46875 2.3125 -6.46875 C 2.328125 -6.46875 2.515625 -6.46875 2.6875 -6.453125 C 2.875 -6.421875 2.953125 -6.421875 2.953125 -6.296875 C 2.953125 -6.25 2.953125 -6.21875 2.921875 -6.109375 Z M 3.078125 -3.625 L 3.703125 -6.09375 C 3.796875 -6.4375 3.8125 -6.46875 4.234375 -6.46875 L 5.515625 -6.46875 C 6.390625 -6.46875 6.59375 -5.890625 6.59375 -5.453125 C 6.59375 -4.578125 5.75 -3.625 4.53125 -3.625 Z M 2.640625 -0.3125 C 2.5 -0.3125 2.484375 -0.3125 2.421875 -0.3125 C 2.328125 -0.328125 2.296875 -0.34375 2.296875 -0.421875 C 2.296875 -0.453125 2.296875 -0.46875 2.34375 -0.640625 L 3.03125 -3.40625 L 4.90625 -3.40625 C 5.859375 -3.40625 6.046875 -2.671875 6.046875 -2.25 C 6.046875 -1.265625 5.15625 -0.3125 3.984375 -0.3125 Z M 2.640625 -0.3125 "/>
+</symbol>
+<symbol overflow="visible" id="f3_glyph0-3">
+<path style="stroke:none;" d="M 7.546875 -6.890625 C 7.546875 -6.921875 7.515625 -7 7.4375 -7 C 7.40625 -7 7.390625 -6.984375 7.28125 -6.875 L 6.59375 -6.109375 C 6.5 -6.25 6.046875 -7 4.9375 -7 C 2.734375 -7 0.5 -4.796875 0.5 -2.5 C 0.5 -0.859375 1.671875 0.21875 3.1875 0.21875 C 4.046875 0.21875 4.796875 -0.171875 5.328125 -0.640625 C 6.25 -1.453125 6.421875 -2.34375 6.421875 -2.375 C 6.421875 -2.484375 6.3125 -2.484375 6.296875 -2.484375 C 6.234375 -2.484375 6.1875 -2.453125 6.171875 -2.375 C 6.078125 -2.09375 5.859375 -1.390625 5.171875 -0.8125 C 4.484375 -0.265625 3.859375 -0.09375 3.34375 -0.09375 C 2.453125 -0.09375 1.40625 -0.609375 1.40625 -2.15625 C 1.40625 -2.71875 1.609375 -4.328125 2.59375 -5.484375 C 3.203125 -6.1875 4.140625 -6.6875 5.015625 -6.6875 C 6.03125 -6.6875 6.625 -5.921875 6.625 -4.765625 C 6.625 -4.375 6.59375 -4.359375 6.59375 -4.265625 C 6.59375 -4.171875 6.703125 -4.171875 6.734375 -4.171875 C 6.859375 -4.171875 6.859375 -4.1875 6.921875 -4.359375 Z M 7.546875 -6.890625 "/>
+</symbol>
+<symbol overflow="visible" id="f3_glyph0-4">
+<path style="stroke:none;" d="M 9.1875 -6.015625 C 9.28125 -6.375 9.296875 -6.46875 10.046875 -6.46875 C 10.265625 -6.46875 10.359375 -6.46875 10.359375 -6.671875 C 10.359375 -6.78125 10.265625 -6.78125 10.09375 -6.78125 L 8.78125 -6.78125 C 8.515625 -6.78125 8.515625 -6.78125 8.390625 -6.59375 L 4.765625 -0.9375 L 4 -6.546875 C 3.96875 -6.78125 3.953125 -6.78125 3.6875 -6.78125 L 2.328125 -6.78125 C 2.140625 -6.78125 2.03125 -6.78125 2.03125 -6.59375 C 2.03125 -6.46875 2.125 -6.46875 2.328125 -6.46875 C 2.453125 -6.46875 2.625 -6.453125 2.75 -6.453125 C 2.90625 -6.421875 2.96875 -6.40625 2.96875 -6.296875 C 2.96875 -6.25 2.953125 -6.21875 2.921875 -6.109375 L 1.671875 -1.046875 C 1.5625 -0.65625 1.40625 -0.34375 0.59375 -0.3125 C 0.546875 -0.3125 0.421875 -0.296875 0.421875 -0.125 C 0.421875 -0.03125 0.46875 0 0.5625 0 C 0.875 0 1.21875 -0.03125 1.546875 -0.03125 C 1.890625 -0.03125 2.25 0 2.5625 0 C 2.625 0 2.75 0 2.75 -0.203125 C 2.75 -0.3125 2.640625 -0.3125 2.5625 -0.3125 C 2 -0.3125 1.890625 -0.515625 1.890625 -0.75 C 1.890625 -0.8125 1.90625 -0.859375 1.9375 -0.96875 L 3.28125 -6.375 L 3.296875 -6.375 L 4.140625 -0.234375 C 4.171875 -0.109375 4.171875 0 4.296875 0 C 4.40625 0 4.46875 -0.109375 4.515625 -0.171875 L 8.515625 -6.453125 L 8.53125 -6.453125 L 7.109375 -0.78125 C 7.015625 -0.390625 7 -0.3125 6.21875 -0.3125 C 6.046875 -0.3125 5.9375 -0.3125 5.9375 -0.125 C 5.9375 0 6.046875 0 6.078125 0 C 6.359375 0 7.03125 -0.03125 7.3125 -0.03125 C 7.71875 -0.03125 8.140625 0 8.546875 0 C 8.609375 0 8.734375 0 8.734375 -0.203125 C 8.734375 -0.3125 8.65625 -0.3125 8.46875 -0.3125 C 8.09375 -0.3125 7.8125 -0.3125 7.8125 -0.484375 C 7.8125 -0.53125 7.8125 -0.546875 7.875 -0.71875 Z M 9.1875 -6.015625 "/>
+</symbol>
+<symbol overflow="visible" id="f3_glyph1-0">
+<path style="stroke:none;" d=""/>
+</symbol>
+<symbol overflow="visible" id="f3_glyph1-1">
+<path style="stroke:none;" d="M 2.015625 -3.28125 C 2.0625 -3.390625 2.078125 -3.453125 2.078125 -3.5 C 2.078125 -3.71875 1.875 -3.875 1.671875 -3.875 C 1.40625 -3.875 1.3125 -3.65625 1.28125 -3.546875 L 0.375 -0.546875 C 0.359375 -0.53125 0.328125 -0.4375 0.328125 -0.4375 C 0.328125 -0.359375 0.546875 -0.28125 0.609375 -0.28125 C 0.65625 -0.28125 0.65625 -0.296875 0.703125 -0.40625 Z M 2.015625 -3.28125 "/>
+</symbol>
+</g>
+</defs>
+<g id="f3_surface1">
+<path style="fill:none;stroke-width:0.3985;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -0.000189299 -0.0000530321 L 51.023581 -38.267881 L 127.559236 -0.0000530321 L 153.071122 127.559373 L 25.511696 127.559373 L -0.000189299 -0.0000530321 L 76.535466 89.291545 M 51.023581 -38.267881 L 76.535466 89.291545 L 153.071122 127.559373 M 51.023581 -38.267881 L 25.511696 127.559373 L 76.535466 89.291545 M 25.511696 127.559373 L 114.803294 108.425459 " transform="matrix(0.995859,0,0,-0.995859,18.203314,137.72651)"/>
+<path style="fill:none;stroke-width:0.3985;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-dasharray:2.98883,2.98883;stroke-miterlimit:10;" d="M 153.071122 127.559373 L -0.000189299 -0.0000530321 L 127.559236 -0.0000530321 L 25.511696 127.559373 L 89.291409 -19.133967 M 89.291409 -19.133967 L -0.000189299 -0.0000530321 L 114.803294 108.425459 " transform="matrix(0.995859,0,0,-0.995859,18.203314,137.72651)"/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 19.097656 137.726563 C 19.097656 137.234375 18.695313 136.832031 18.203125 136.832031 C 17.710938 136.832031 17.308594 137.234375 17.308594 137.726563 C 17.308594 138.21875 17.710938 138.621094 18.203125 138.621094 C 18.695313 138.621094 19.097656 138.21875 19.097656 137.726563 Z M 19.097656 137.726563 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f3_glyph0-1" x="6.860475" y="141.116415"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 69.910156 175.835938 C 69.910156 175.34375 69.507813 174.941406 69.015625 174.941406 C 68.523438 174.941406 68.121094 175.34375 68.121094 175.835938 C 68.121094 176.328125 68.523438 176.730469 69.015625 176.730469 C 69.507813 176.730469 69.910156 176.328125 69.910156 175.835938 Z M 69.910156 175.835938 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f3_glyph0-2" x="65.003725" y="186.847273"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 146.128906 137.726563 C 146.128906 137.234375 145.726563 136.832031 145.234375 136.832031 C 144.742188 136.832031 144.339844 137.234375 144.339844 137.726563 C 144.339844 138.21875 144.742188 138.621094 145.234375 138.621094 C 145.726563 138.621094 146.128906 138.21875 146.128906 137.726563 Z M 146.128906 137.726563 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f3_glyph0-3" x="148.953674" y="141.116415"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 44.503906 10.695313 C 44.503906 10.203125 44.101563 9.800781 43.609375 9.800781 C 43.117188 9.800781 42.714844 10.203125 42.714844 10.695313 C 42.714844 11.1875 43.117188 11.589844 43.609375 11.589844 C 44.101563 11.589844 44.503906 11.1875 44.503906 10.695313 Z M 44.503906 10.695313 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f3_glyph0-1" x="30.874628" y="14.426173"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f3_glyph1-1" x="38.315689" y="10.826141"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 95.316406 48.804688 C 95.316406 48.3125 94.914063 47.910156 94.421875 47.910156 C 93.929688 47.910156 93.527344 48.3125 93.527344 48.804688 C 93.527344 49.296875 93.929688 49.699219 94.421875 49.699219 C 94.914063 49.699219 95.316406 49.296875 95.316406 48.804688 Z M 95.316406 48.804688 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f3_glyph0-2" x="89.016882" y="44.913412"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f3_glyph1-1" x="97.040521" y="41.312384"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 171.53125 10.695313 C 171.53125 10.203125 171.132813 9.800781 170.640625 9.800781 C 170.148438 9.800781 169.746094 10.203125 169.746094 10.695313 C 169.746094 11.1875 170.148438 11.589844 170.640625 11.589844 C 171.132813 11.589844 171.53125 11.1875 171.53125 10.695313 Z M 171.53125 10.695313 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f3_glyph0-3" x="172.967827" y="14.426173"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f3_glyph1-1" x="180.768394" y="10.826141"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 108.019531 156.78125 C 108.019531 156.289063 107.617188 155.886719 107.125 155.886719 C 106.632813 155.886719 106.230469 156.289063 106.230469 156.78125 C 106.230469 157.273438 106.632813 157.675781 107.125 157.675781 C 107.617188 157.675781 108.019531 157.273438 108.019531 156.78125 Z M 108.019531 156.78125 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f3_glyph0-4" x="108.370413" y="163.981346"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 133.421875 29.75 C 133.421875 29.257813 133.023438 28.859375 132.53125 28.859375 C 132.039063 28.859375 131.636719 29.257813 131.636719 29.75 C 131.636719 30.242188 132.039063 30.644531 132.53125 30.644531 C 133.023438 30.644531 133.421875 30.242188 133.421875 29.75 Z M 133.421875 29.75 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f3_glyph0-4" x="125.78401" y="25.859634"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f3_glyph1-1" x="136.490494" y="22.258607"/>
+</g>
+</g>
+</svg></div></div></div> <ol class="paren-a"><li>Giao tuyến của hai mặt phẳng $\left(AB'C'\right)$ và $\left(A'BC\right)$ đi qua giao điểm của hai đường thẳng $AM'$ và $A'M$.</li><li>Vì $AMM'A'$ là hình bình hành nên $AM\parallel A'M'$.</li><li>Vì $\left(ABC\right)\parallel\left(A'B'C'\right)$ nên hai mặt đáy của hình lăng trụ nằm trên hai mặt phẳng song song.</li><li>Điểm $A'$ là hình chiếu của điểm $A$ trên mặt phẳng $\left(A'B'C'\right)$ theo phương $CC'$ hoặc $BB'$.</li></ol></div></div></div>
+<div class="question"><div class="question-text"><div class="tp"><b>Câu 2:</b> Cho cấp số nhân $(u_n)$ có $u_1=3$, công bội $q=-2$ và số hạng cuối là $192$.</div></div><div class="options"><div class="table-responsive"><table class="tf-table"><tr><td><b>a.</b> Số hạng thứ hai $u_2=-6$</td><td style="width: 120px;"><div class="tf-radio-group"><label><input type="radio" name="P2_Cau_2_a" value="Đúng"> Đ</label><label><input type="radio" name="P2_Cau_2_a" value="Sai"> S</label></div></td></tr><tr><td><b>b.</b> $(u_n)$ là dãy số giảm</td><td style="width: 120px;"><div class="tf-radio-group"><label><input type="radio" name="P2_Cau_2_b" value="Đúng"> Đ</label><label><input type="radio" name="P2_Cau_2_b" value="Sai"> S</label></div></td></tr><tr><td><b>c.</b> Cấp số nhân có $6$ số hạng</td><td style="width: 120px;"><div class="tf-radio-group"><label><input type="radio" name="P2_Cau_2_c" value="Đúng"> Đ</label><label><input type="radio" name="P2_Cau_2_c" value="Sai"> S</label></div></td></tr><tr><td><b>d.</b> Tổng các số hạng là $S_n=129$</td><td style="width: 120px;"><div class="tf-radio-group"><label><input type="radio" name="P2_Cau_2_d" value="Đúng"> Đ</label><label><input type="radio" name="P2_Cau_2_d" value="Sai"> S</label></div></td></tr></table></div></div><div class="solution-box"><div class="tp"><b>Lời giải chi tiết:</b> <ol class="paren-a"><li>Số hạng thứ hai $u_2=u_1\cdot q=3\cdot (2)=-6$.</li><li>Ta có $u_1=3$, $u_2-6$ và $u_3=u_2\cdot q=-6\cdot(-2)=12$.<br> Do đó, dãy số $(u_n)$ là dãy số không tăng, không giảm.</li><li>Vì số hạng cuối của cấp số nhân $(u_n)$ là $192$ nên \[u_1\cdot q=192\Leftrightarrow 3\cdot(-2)^{n-1}=192\Leftrightarrow n=7.\] Vậy cấp số nhân $(u_n)$ có $7$ số hạng.</li><li>Vì cấp số nhân $(u_n)$ có $7$ số hạng nên \[S_7=u_1\cdot\dfrac{1-q^7}{1-q}=3\cdot\dfrac{1-(-2)^7}{1+2}=129.\]</li></ol></div></div></div>
+<div class="question"><div class="question-text"><div class="tp"><b>Câu 3:</b> Do nhu cầu đi lại của gia đình, anh Bình quyết định thực hiện tích góp tiền để mua một chiếc ô tô trị giá $2\,452$ triệu đồng. <ul><li><b>Đợt thứ nhất</b> Anh Bình đã tích góp theo nguyên tắc tháng sau tích góp nhiều hơn tháng ngay trước đó số tiền là 3 triệu đồng và cứ như thế đến tháng thứ 8 anh phải góp 24 triệu đồng. Đến hết đợt thứ nhất anh Bình có tất cả 408 triệu đồng.</li><li><b>Đợt thứ hai kế tiếp</b> Do muốn rút ngắn thời gian mua xe thì số tiền còn lại anh tiếp tục tích góp với tháng đầu là 4 triệu đồng và mỗi tháng tiếp theo số tiền gấp đôi tháng kề trước nó.</li></ul></div></div><div class="options"><div class="table-responsive"><table class="tf-table"><tr><td><b>a.</b> Đợt thứ nhất anh Bình tích lũy tiền theo dãy số với cấp số cộng có công sai là 3 triệu và $u_1=3$ triệu</td><td style="width: 120px;"><div class="tf-radio-group"><label><input type="radio" name="P2_Cau_3_a" value="Đúng"> Đ</label><label><input type="radio" name="P2_Cau_3_a" value="Sai"> S</label></div></td></tr><tr><td><b>b.</b> Đợt thứ hai anh Bình tích lũy tiền theo dãy số với cấp số nhân có công bội là $q=2$ và $u_1=4$ triệu</td><td style="width: 120px;"><div class="tf-radio-group"><label><input type="radio" name="P2_Cau_3_b" value="Đúng"> Đ</label><label><input type="radio" name="P2_Cau_3_b" value="Sai"> S</label></div></td></tr><tr><td><b>c.</b> Anh Bình tích lũy tiền hết đợt thứ nhất trong 14 tháng</td><td style="width: 120px;"><div class="tf-radio-group"><label><input type="radio" name="P2_Cau_3_c" value="Đúng"> Đ</label><label><input type="radio" name="P2_Cau_3_c" value="Sai"> S</label></div></td></tr><tr><td><b>d.</b> Thời gian tối thiểu để anh Bình tích góp đủ tiền mua xe là 25 tháng</td><td style="width: 120px;"><div class="tf-radio-group"><label><input type="radio" name="P2_Cau_3_d" value="Đúng"> Đ</label><label><input type="radio" name="P2_Cau_3_d" value="Sai"> S</label></div></td></tr></table></div></div><div class="solution-box"><div class="tp"><b>Lời giải chi tiết:</b> <ol class="paren-a"><li>Ở đợt thứ nhất, số tiền anh Bình tích góp mỗi tháng theo thứ tự lập thành cấp số cộng với công sai $d=3$ triệu.<br> Ta có $24=u_1+7\cdot 3\Leftrightarrow u_1=3$.</li><li>Ở đợt thứ hai, số tiền anh Bình tích góp mỗi tháng theo thứ tự lập thành cấp số nhân với công bội $q=2$ và $u_1=4$ triệu.</li><li>Ở đợt thứ nhất, ta có $$S_n=\dfrac{n(2\cdot 3+(n-1)\cdot 3)}{2}=408\Leftrightarrow n=16.$$ Vậy anh Bình tích lũy tiền hết đợt thứ nhất trong 16 tháng.</li><li>Số tiền tối thiểu anh Bình cần tích góp trong đợt thứ hai là $2452-408=2044$ triệu đồng.<br> Ta có $$S_n=4\dfrac{1-2^n}{1-2}=2044\Leftrightarrow n=9.$$ Vậy anh Bình cần tối thiểu $6+19=25$ tháng để tích góp đủ tiền mua xe.</li></ol></div></div></div>
+<div class="question"><div class="question-text"><div class="tp"><b>Câu 4:</b> Cho hàm số $f(x)=\left\{\begin{aligned}&amp;\dfrac{x^2-5x+6}{(x-3)(x-4)} &amp; \text{nếu } x \neq 3\\&amp;-1&amp; \text{nếu } x=3.\end{aligned}\right.$</div></div><div class="options"><div class="table-responsive"><table class="tf-table"><tr><td><b>a.</b> $f(3)=-1$</td><td style="width: 120px;"><div class="tf-radio-group"><label><input type="radio" name="P2_Cau_4_a" value="Đúng"> Đ</label><label><input type="radio" name="P2_Cau_4_a" value="Sai"> S</label></div></td></tr><tr><td><b>b.</b> $\lim\limits_{x \to 3} f(x)=-1$</td><td style="width: 120px;"><div class="tf-radio-group"><label><input type="radio" name="P2_Cau_4_b" value="Đúng"> Đ</label><label><input type="radio" name="P2_Cau_4_b" value="Sai"> S</label></div></td></tr><tr><td><b>c.</b> Hàm số $f(x)$ liên tục tại $x=3$</td><td style="width: 120px;"><div class="tf-radio-group"><label><input type="radio" name="P2_Cau_4_c" value="Đúng"> Đ</label><label><input type="radio" name="P2_Cau_4_c" value="Sai"> S</label></div></td></tr><tr><td><b>d.</b> $f(x)$ liên tục trên $\mathbb{R}$</td><td style="width: 120px;"><div class="tf-radio-group"><label><input type="radio" name="P2_Cau_4_d" value="Đúng"> Đ</label><label><input type="radio" name="P2_Cau_4_d" value="Sai"> S</label></div></td></tr></table></div></div><div class="solution-box"><div class="tp"><b>Lời giải chi tiết:</b> <ol class="paren-a"><li>Ta có $f(3)=-1$.</li><li>$\lim\limits_{x \to 3} f(x)=\lim\limits_{x \to 3}\dfrac{x^2-5x+6}{(x-3)(x-4)}=\lim\limits_{x \to 3}\dfrac{(x-2)(x-3)}{(x-3)(x-4)}=\lim\limits_{x \to 3}\dfrac{x-2}{x-4}=-1$.</li><li>Vì $f(3)=\lim\limits_{x \to 3} f(x)$ nên hàm số $f(x)$ liên tục tại $x=3$.</li><li>Vì hàm số $f(x)$ không xác định tại $x=4$ nên hàm số này gián đoạn tại $x=4$.<br> Vậy hàm số $f(x)$ không liên tục trên $\mathbb{R}$.</li></ol></div></div></div>
+<h3>PHẦN 3. Câu trắc nghiệm trả lời ngắn</h3>
+<div class="question"><div class="question-text"><div class="tp"><b>Câu 1:</b> Cho tứ diện $ABCD$, $G$ là trọng tâm của $\triangle ABD$ và $M$ là một điểm trên cạnh $BC$ sao cho $MB=kMC$ $(k\in \mathbb{R})$. Biết $MG$ song song với $(ACD)$. Tìm $k$.</div></div><div class="options"><div class="short-ans-group"><input type="text" class="short-ans-box" maxlength="1" id="P3_Cau_1_1" oninput="this.value=this.value.replace('.', ','); moveNext(this, 'P3_Cau_1_2')" onkeydown="movePrev(event, this, null)"><input type="text" class="short-ans-box" maxlength="1" id="P3_Cau_1_2" oninput="this.value=this.value.replace('.', ','); moveNext(this, 'P3_Cau_1_3')" onkeydown="movePrev(event, this, 'P3_Cau_1_1')"><input type="text" class="short-ans-box" maxlength="1" id="P3_Cau_1_3" oninput="this.value=this.value.replace('.', ','); moveNext(this, 'P3_Cau_1_4')" onkeydown="movePrev(event, this, 'P3_Cau_1_2')"><input type="text" class="short-ans-box" maxlength="1" id="P3_Cau_1_4" oninput="this.value=this.value.replace('.', ','); moveNext(this, null)" onkeydown="movePrev(event, this, 'P3_Cau_1_3')"></div></div><div class="solution-box"><div class="tp"><b>Lời giải chi tiết:</b> Gọi $E$ là trung điểm của $AD$.<br> Ta có $\overrightarrow{BG}=\dfrac{2}{3}\overrightarrow{BE}$ và $\overrightarrow{BM}= \dfrac{k}{k+1}\overrightarrow{BC}$.<br> Vì $MG\parallel (ACD)$ nên $MG\parallel EC$.<br> Do đó $\dfrac{BG}{BE}=\dfrac{BM}{BC}=\dfrac{2}{3}$.<br> Suy ra $\dfrac{k}{k+1}=\dfrac{2}{3}$ hay $k=2$.</div><div class="tp"><div class="center"><div class="tp"><div class="table-responsive figure" style="text-align:center;margin:10px 0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="168.956pt" height="146.559pt" viewBox="0 0 168.956 146.559" version="1.2">
+<defs>
+<g>
+<symbol overflow="visible" id="f4_glyph0-0">
+<path style="stroke:none;" d=""/>
+</symbol>
+<symbol overflow="visible" id="f4_glyph0-1">
+<path style="stroke:none;" d="M 1.328125 -0.625 C 1.25 -0.328125 1.234375 -0.265625 0.65625 -0.265625 C 0.5 -0.265625 0.40625 -0.265625 0.40625 -0.109375 C 0.40625 0 0.515625 0 0.640625 0 L 3.375 0 C 5.0625 0 6.734375 -1.609375 6.734375 -3.375 C 6.734375 -4.59375 5.921875 -5.4375 4.734375 -5.4375 L 1.953125 -5.4375 C 1.8125 -5.4375 1.703125 -5.4375 1.703125 -5.28125 C 1.703125 -5.171875 1.796875 -5.171875 1.9375 -5.171875 C 2.1875 -5.171875 2.421875 -5.171875 2.421875 -5.046875 C 2.421875 -5.015625 2.421875 -5 2.390625 -4.90625 Z M 3.078125 -4.875 C 3.15625 -5.140625 3.171875 -5.171875 3.484375 -5.171875 L 4.453125 -5.171875 C 5.390625 -5.171875 6.015625 -4.640625 6.015625 -3.671875 C 6.015625 -3.40625 5.90625 -2.109375 5.203125 -1.21875 C 4.859375 -0.765625 4.171875 -0.265625 3.234375 -0.265625 L 2.046875 -0.265625 C 1.984375 -0.28125 1.953125 -0.28125 1.953125 -0.328125 C 1.953125 -0.390625 1.96875 -0.46875 1.984375 -0.515625 Z M 3.078125 -4.875 "/>
+</symbol>
+<symbol overflow="visible" id="f4_glyph0-2">
+<path style="stroke:none;" d="M 1.46875 -0.953125 C 1.109375 -0.359375 0.78125 -0.28125 0.5 -0.265625 C 0.40625 -0.25 0.3125 -0.25 0.3125 -0.109375 C 0.3125 -0.09375 0.328125 0 0.421875 0 C 0.5 0 0.546875 -0.03125 1.109375 -0.03125 C 1.640625 -0.03125 1.828125 0 1.875 0 C 1.90625 0 2.03125 0 2.03125 -0.15625 C 2.03125 -0.25 1.921875 -0.265625 1.890625 -0.265625 C 1.71875 -0.265625 1.546875 -0.328125 1.546875 -0.515625 C 1.546875 -0.625 1.609375 -0.734375 1.765625 -0.96875 L 2.3125 -1.84375 L 4.484375 -1.84375 L 4.65625 -0.5 C 4.65625 -0.375 4.515625 -0.265625 4.140625 -0.265625 C 4.015625 -0.265625 3.90625 -0.265625 3.90625 -0.109375 C 3.90625 -0.109375 3.921875 0 4.046875 0 C 4.125 0 4.4375 -0.015625 4.5 -0.03125 L 5 -0.03125 C 5.71875 -0.03125 5.859375 0 5.921875 0 C 5.953125 0 6.078125 0 6.078125 -0.15625 C 6.078125 -0.265625 5.96875 -0.265625 5.84375 -0.265625 C 5.40625 -0.265625 5.40625 -0.328125 5.375 -0.53125 L 4.75 -5.453125 C 4.71875 -5.625 4.71875 -5.671875 4.578125 -5.671875 C 4.4375 -5.671875 4.390625 -5.59375 4.34375 -5.515625 Z M 2.46875 -2.09375 L 4.125 -4.71875 L 4.453125 -2.09375 Z M 2.46875 -2.09375 "/>
+</symbol>
+<symbol overflow="visible" id="f4_glyph0-3">
+<path style="stroke:none;" d="M 6.328125 -5.390625 C 6.34375 -5.421875 6.359375 -5.46875 6.359375 -5.5 C 6.359375 -5.5625 6.3125 -5.59375 6.25 -5.59375 C 6.203125 -5.59375 6.171875 -5.578125 6.109375 -5.5 L 5.546875 -4.890625 C 5.484375 -5 5.0625 -5.59375 4.125 -5.59375 C 2.28125 -5.59375 0.421875 -3.890625 0.421875 -2.0625 C 0.421875 -0.671875 1.46875 0.171875 2.734375 0.171875 C 3.78125 0.171875 4.65625 -0.46875 5.09375 -1.09375 C 5.359375 -1.484375 5.453125 -1.859375 5.453125 -1.90625 C 5.453125 -1.984375 5.40625 -2.015625 5.34375 -2.015625 C 5.234375 -2.015625 5.21875 -1.96875 5.203125 -1.890625 C 4.875 -0.78125 3.796875 -0.09375 2.84375 -0.09375 C 2.03125 -0.09375 1.171875 -0.578125 1.171875 -1.796875 C 1.171875 -2.046875 1.265625 -3.375 2.140625 -4.359375 C 2.75 -5.03125 3.5625 -5.34375 4.1875 -5.34375 C 5.1875 -5.34375 5.59375 -4.53125 5.59375 -3.78125 C 5.59375 -3.671875 5.5625 -3.515625 5.5625 -3.421875 C 5.5625 -3.3125 5.671875 -3.3125 5.703125 -3.3125 C 5.8125 -3.3125 5.828125 -3.34375 5.859375 -3.484375 Z M 6.328125 -5.390625 "/>
+</symbol>
+<symbol overflow="visible" id="f4_glyph0-4">
+<path style="stroke:none;" d="M 1.34375 -0.625 C 1.265625 -0.328125 1.25 -0.265625 0.671875 -0.265625 C 0.515625 -0.265625 0.421875 -0.265625 0.421875 -0.109375 C 0.421875 0 0.53125 0 0.65625 0 L 3.609375 0 C 4.921875 0 5.90625 -0.9375 5.90625 -1.703125 C 5.90625 -2.28125 5.40625 -2.75 4.609375 -2.84375 C 5.53125 -3.015625 6.328125 -3.625 6.328125 -4.3125 C 6.328125 -4.921875 5.734375 -5.4375 4.734375 -5.4375 L 1.96875 -5.4375 C 1.828125 -5.4375 1.71875 -5.4375 1.71875 -5.28125 C 1.71875 -5.171875 1.8125 -5.171875 1.953125 -5.171875 C 2.21875 -5.171875 2.4375 -5.171875 2.4375 -5.046875 C 2.4375 -5.015625 2.4375 -5 2.40625 -4.90625 Z M 2.578125 -2.9375 L 3.0625 -4.875 C 3.140625 -5.140625 3.15625 -5.171875 3.46875 -5.171875 L 4.625 -5.171875 C 5.40625 -5.171875 5.578125 -4.65625 5.578125 -4.328125 C 5.578125 -3.65625 4.84375 -2.9375 3.828125 -2.9375 Z M 2.03125 -0.265625 C 1.96875 -0.28125 1.9375 -0.28125 1.9375 -0.328125 C 1.9375 -0.390625 1.953125 -0.46875 1.96875 -0.515625 L 2.53125 -2.71875 L 4.140625 -2.71875 C 4.890625 -2.71875 5.125 -2.21875 5.125 -1.765625 C 5.125 -0.984375 4.359375 -0.265625 3.40625 -0.265625 Z M 2.03125 -0.265625 "/>
+</symbol>
+<symbol overflow="visible" id="f4_glyph0-5">
+<path style="stroke:none;" d="M 5.953125 -1.84375 C 5.96875 -1.875 5.984375 -1.921875 5.984375 -1.953125 C 5.984375 -1.96875 5.984375 -2.0625 5.875 -2.0625 C 5.78125 -2.0625 5.78125 -2.046875 5.6875 -1.875 C 5.1875 -0.703125 4.8125 -0.265625 3.515625 -0.265625 L 2.0625 -0.265625 C 2 -0.28125 1.96875 -0.28125 1.96875 -0.328125 C 1.96875 -0.390625 1.984375 -0.46875 2 -0.515625 L 2.546875 -2.6875 L 3.40625 -2.6875 C 3.984375 -2.6875 4.109375 -2.578125 4.109375 -2.328125 C 4.109375 -2.328125 4.109375 -2.1875 4.046875 -1.96875 C 4.03125 -1.9375 4.03125 -1.890625 4.03125 -1.859375 C 4.03125 -1.859375 4.03125 -1.75 4.140625 -1.75 C 4.234375 -1.75 4.25 -1.796875 4.28125 -1.9375 L 4.703125 -3.59375 C 4.71875 -3.625 4.734375 -3.734375 4.734375 -3.75 C 4.734375 -3.828125 4.671875 -3.875 4.625 -3.875 C 4.515625 -3.875 4.515625 -3.8125 4.46875 -3.6875 C 4.3125 -3.0625 4.09375 -2.9375 3.40625 -2.9375 L 2.609375 -2.9375 L 3.09375 -4.84375 C 3.171875 -5.125 3.171875 -5.140625 3.5 -5.140625 L 4.734375 -5.140625 C 5.6875 -5.140625 6 -4.953125 6 -4.25 C 6 -4.09375 5.953125 -3.890625 5.953125 -3.734375 C 5.953125 -3.640625 6.015625 -3.609375 6.078125 -3.609375 C 6.1875 -3.609375 6.203125 -3.671875 6.21875 -3.8125 L 6.359375 -5.15625 C 6.359375 -5.203125 6.359375 -5.25 6.359375 -5.296875 C 6.359375 -5.40625 6.265625 -5.40625 6.125 -5.40625 L 1.9375 -5.40625 C 1.78125 -5.40625 1.6875 -5.40625 1.6875 -5.25 C 1.6875 -5.140625 1.796875 -5.140625 1.921875 -5.140625 C 1.953125 -5.140625 2.09375 -5.140625 2.234375 -5.125 C 2.390625 -5.109375 2.40625 -5.09375 2.40625 -5.015625 C 2.40625 -4.984375 2.390625 -4.9375 2.390625 -4.890625 L 1.3125 -0.625 C 1.25 -0.328125 1.234375 -0.265625 0.640625 -0.265625 C 0.5 -0.265625 0.390625 -0.265625 0.390625 -0.109375 C 0.390625 0 0.5 0 0.640625 0 L 4.9375 0 C 5.140625 0 5.140625 0 5.203125 -0.140625 Z M 5.953125 -1.84375 "/>
+</symbol>
+<symbol overflow="visible" id="f4_glyph0-6">
+<path style="stroke:none;" d="M 6.34375 -5.390625 C 6.34375 -5.421875 6.359375 -5.46875 6.359375 -5.5 C 6.359375 -5.5625 6.3125 -5.59375 6.265625 -5.59375 C 6.203125 -5.59375 6.171875 -5.578125 6.109375 -5.5 L 5.5625 -4.890625 C 5.1875 -5.40625 4.671875 -5.59375 4.140625 -5.59375 C 2.28125 -5.59375 0.421875 -3.875 0.421875 -2.0625 C 0.421875 -0.734375 1.40625 0.171875 2.765625 0.171875 C 3.625 0.171875 4.25 -0.140625 4.546875 -0.484375 C 4.640625 -0.234375 4.828125 -0.015625 4.921875 -0.015625 C 4.953125 -0.015625 4.984375 -0.03125 5 -0.0625 C 5.046875 -0.1875 5.234375 -1 5.296875 -1.21875 C 5.375 -1.546875 5.421875 -1.765625 5.46875 -1.828125 C 5.546875 -1.921875 5.6875 -1.9375 5.9375 -1.9375 C 5.96875 -1.9375 6.09375 -1.9375 6.09375 -2.078125 C 6.09375 -2.15625 6.03125 -2.1875 5.96875 -2.1875 C 5.921875 -2.1875 5.828125 -2.171875 5.046875 -2.171875 C 4.84375 -2.171875 4.578125 -2.171875 4.46875 -2.171875 C 4.34375 -2.1875 4.03125 -2.1875 3.90625 -2.1875 C 3.859375 -2.1875 3.734375 -2.1875 3.734375 -2.046875 C 3.734375 -1.9375 3.828125 -1.9375 4.03125 -1.9375 C 4.203125 -1.9375 4.5 -1.9375 4.6875 -1.859375 C 4.703125 -1.84375 4.703125 -1.796875 4.703125 -1.765625 C 4.703125 -1.71875 4.65625 -1.546875 4.640625 -1.453125 C 4.59375 -1.234375 4.5 -0.90625 4.46875 -0.828125 C 4.21875 -0.296875 3.4375 -0.09375 2.890625 -0.09375 C 2.109375 -0.09375 1.1875 -0.515625 1.1875 -1.8125 C 1.1875 -2.46875 1.453125 -3.609375 2.15625 -4.375 C 2.921875 -5.203125 3.78125 -5.34375 4.1875 -5.34375 C 5.15625 -5.34375 5.609375 -4.578125 5.609375 -3.765625 C 5.609375 -3.65625 5.578125 -3.515625 5.578125 -3.421875 C 5.578125 -3.3125 5.671875 -3.3125 5.703125 -3.3125 C 5.8125 -3.3125 5.828125 -3.34375 5.859375 -3.484375 Z M 6.34375 -5.390625 "/>
+</symbol>
+<symbol overflow="visible" id="f4_glyph0-7">
+<path style="stroke:none;" d="M 7.71875 -4.78125 C 7.796875 -5.09375 7.8125 -5.171875 8.375 -5.171875 C 8.5625 -5.171875 8.65625 -5.171875 8.65625 -5.328125 C 8.65625 -5.4375 8.546875 -5.4375 8.40625 -5.4375 L 7.375 -5.4375 C 7.171875 -5.4375 7.140625 -5.4375 7.03125 -5.265625 L 4.046875 -0.734375 L 3.328125 -5.21875 C 3.296875 -5.421875 3.296875 -5.4375 3.046875 -5.4375 L 1.984375 -5.4375 C 1.84375 -5.4375 1.734375 -5.4375 1.734375 -5.28125 C 1.734375 -5.171875 1.84375 -5.171875 1.96875 -5.171875 C 2.234375 -5.171875 2.453125 -5.171875 2.453125 -5.046875 C 2.453125 -5.015625 2.453125 -5 2.421875 -4.90625 L 1.421875 -0.84375 C 1.3125 -0.453125 1.109375 -0.28125 0.578125 -0.265625 C 0.53125 -0.265625 0.4375 -0.25 0.4375 -0.109375 C 0.4375 -0.0625 0.484375 0 0.5625 0 C 0.59375 0 0.765625 -0.03125 1.34375 -0.03125 C 1.96875 -0.03125 2.09375 0 2.15625 0 C 2.1875 0 2.3125 0 2.3125 -0.15625 C 2.3125 -0.25 2.234375 -0.265625 2.171875 -0.265625 C 1.890625 -0.265625 1.640625 -0.3125 1.640625 -0.59375 C 1.640625 -0.640625 1.671875 -0.75 1.671875 -0.75 L 2.75 -5.078125 L 2.765625 -5.078125 L 3.53125 -0.21875 C 3.5625 -0.09375 3.5625 0 3.671875 0 C 3.78125 0 3.84375 -0.09375 3.890625 -0.15625 L 7.15625 -5.140625 L 7.171875 -5.125 L 6.046875 -0.625 C 5.96875 -0.328125 5.953125 -0.265625 5.375 -0.265625 C 5.21875 -0.265625 5.125 -0.265625 5.125 -0.109375 C 5.125 -0.078125 5.140625 0 5.25 0 C 5.359375 0 5.59375 -0.015625 5.703125 -0.03125 L 6.21875 -0.03125 C 6.953125 -0.03125 7.140625 0 7.203125 0 C 7.25 0 7.359375 0 7.359375 -0.15625 C 7.359375 -0.265625 7.25 -0.265625 7.125 -0.265625 C 7.09375 -0.265625 6.953125 -0.265625 6.8125 -0.28125 C 6.65625 -0.296875 6.640625 -0.3125 6.640625 -0.390625 C 6.640625 -0.421875 6.65625 -0.484375 6.65625 -0.515625 Z M 7.71875 -4.78125 "/>
+</symbol>
+</g>
+</defs>
+<g id="f4_surface1">
+<path style="fill:none;stroke-width:0.3985;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-dasharray:2.98883,2.98883;stroke-miterlimit:10;" d="M -0.000576479 -0.00172091 L 141.733219 -0.00172091 L 22.547537 34.143684 M 109.523308 -15.035102 L 30.066186 7.728501 " transform="matrix(0.997,0,0,-0.997,13.738856,84.619378)"/>
+<path style="fill:none;stroke-width:0.3985;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 45.099568 68.289089 L 45.099568 -45.097947 L 22.547537 34.143684 M 45.099568 68.289089 L -0.000576479 -0.00172091 L 45.099568 -45.097947 L 141.733219 -0.00172091 Z M 45.099568 68.289089 " transform="matrix(0.997,0,0,-0.997,13.738856,84.619378)"/>
+<path style="fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;stroke-width:0.3985;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 46.094741 68.289089 C 46.094741 68.83761 45.648088 69.284262 45.099568 69.284262 C 44.547129 69.284262 44.104395 68.83761 44.104395 68.289089 C 44.104395 67.73665 44.547129 67.293916 45.099568 67.293916 C 45.648088 67.293916 46.094741 67.73665 46.094741 68.289089 Z M 46.094741 68.289089 " transform="matrix(0.997,0,0,-0.997,13.738856,84.619378)"/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f4_glyph0-1" x="55.121335" y="12.298992"/>
+</g>
+<path style="fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;stroke-width:0.3985;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 0.994597 -0.00172091 C 0.994597 0.550718 0.551862 0.99737 -0.000576479 0.99737 C -0.549097 0.99737 -0.995749 0.550718 -0.995749 -0.00172091 C -0.995749 -0.550241 -0.549097 -0.996894 -0.000576479 -0.996894 C 0.551862 -0.996894 0.994597 -0.550241 0.994597 -0.00172091 Z M 0.994597 -0.00172091 " transform="matrix(0.997,0,0,-0.997,13.738856,84.619378)"/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f4_glyph0-2" x="7.099833" y="93.356089"/>
+</g>
+<path style="fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;stroke-width:0.3985;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 142.728392 -0.00172091 C 142.728392 0.550718 142.285657 0.99737 141.733219 0.99737 C 141.184698 0.99737 140.738046 0.550718 140.738046 -0.00172091 C 140.738046 -0.550241 141.184698 -0.996894 141.733219 -0.996894 C 142.285657 -0.996894 142.728392 -0.550241 142.728392 -0.00172091 Z M 142.728392 -0.00172091 " transform="matrix(0.997,0,0,-0.997,13.738856,84.619378)"/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f4_glyph0-3" x="155.233096" y="93.356089"/>
+</g>
+<path style="fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;stroke-width:0.3985;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 46.094741 -45.097947 C 46.094741 -44.549427 45.648088 -44.102774 45.099568 -44.102774 C 44.547129 -44.102774 44.104395 -44.549427 44.104395 -45.097947 C 44.104395 -45.650386 44.547129 -46.097038 45.099568 -46.097038 C 45.648088 -46.097038 46.094741 -45.650386 46.094741 -45.097947 Z M 46.094741 -45.097947 " transform="matrix(0.997,0,0,-0.997,13.738856,84.619378)"/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f4_glyph0-4" x="55.321732" y="139.25099"/>
+</g>
+<path style="fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;stroke-width:0.3985;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 23.546628 34.143684 C 23.546628 34.696123 23.099975 35.138857 22.547537 35.138857 C 21.999016 35.138857 21.552364 34.696123 21.552364 34.143684 C 21.552364 33.595163 21.999016 33.148511 22.547537 33.148511 C 23.099975 33.148511 23.546628 33.595163 23.546628 34.143684 Z M 23.546628 34.143684 " transform="matrix(0.997,0,0,-0.997,13.738856,84.619378)"/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f4_glyph0-5" x="31.69682" y="46.446242"/>
+</g>
+<path style="fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;stroke-width:0.3985;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 31.061359 7.728501 C 31.061359 8.28094 30.614707 8.727592 30.066186 8.727592 C 29.513748 8.727592 29.071013 8.28094 29.071013 7.728501 C 29.071013 7.17998 29.513748 6.733328 30.066186 6.733328 C 30.614707 6.733328 31.061359 7.17998 31.061359 7.728501 Z M 31.061359 7.728501 " transform="matrix(0.997,0,0,-0.997,13.738856,84.619378)"/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f4_glyph0-6" x="33.47148" y="79.628396"/>
+</g>
+<path style="fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;stroke-width:0.3985;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 110.518481 -15.035102 C 110.518481 -14.482664 110.071828 -14.036011 109.523308 -14.036011 C 108.970869 -14.036011 108.524217 -14.482664 108.524217 -15.035102 C 108.524217 -15.583623 108.970869 -16.030275 109.523308 -16.030275 C 110.071828 -16.030275 110.518481 -15.583623 110.518481 -15.035102 Z M 110.518481 -15.035102 " transform="matrix(0.997,0,0,-0.997,13.738856,84.619378)"/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f4_glyph0-7" x="118.452769" y="109.275188"/>
+</g>
+</g>
+</svg></div></div></div></div></div></div>
+<div class="question"><div class="question-text"><div class="tp"><b>Câu 2:</b> Cho $a$ và $b$ là các số thực thỏa mãn $
+	\lim\limits_{x\to 6}\dfrac{x^2+ax+b}{x-6}=-5.
+	$ Tính $-2a-b$.</div></div><div class="options"><div class="short-ans-group"><input type="text" class="short-ans-box" maxlength="1" id="P3_Cau_2_1" oninput="this.value=this.value.replace('.', ','); moveNext(this, 'P3_Cau_2_2')" onkeydown="movePrev(event, this, null)"><input type="text" class="short-ans-box" maxlength="1" id="P3_Cau_2_2" oninput="this.value=this.value.replace('.', ','); moveNext(this, 'P3_Cau_2_3')" onkeydown="movePrev(event, this, 'P3_Cau_2_1')"><input type="text" class="short-ans-box" maxlength="1" id="P3_Cau_2_3" oninput="this.value=this.value.replace('.', ','); moveNext(this, 'P3_Cau_2_4')" onkeydown="movePrev(event, this, 'P3_Cau_2_2')"><input type="text" class="short-ans-box" maxlength="1" id="P3_Cau_2_4" oninput="this.value=this.value.replace('.', ','); moveNext(this, null)" onkeydown="movePrev(event, this, 'P3_Cau_2_3')"></div></div><div class="solution-box"><div class="tp"><b>Lời giải chi tiết:</b> Vì $
+		\lim\limits_{x\to 6}\dfrac{x^2+ax+b}{x-6}=-5
+		$ nên $\lim\limits_{x\to 6}x^2+ax+b=0$, suy ra $36+6a+b=0$&thinsp;&thinsp;hay $b=-6a-36$.<br> Khi đó \begin{align*}
+		\lim\limits_{x\to 6}\dfrac{x^2+ax+b}{x-6}=-5 &amp;\Leftrightarrow \lim\limits_{x \to 6} \dfrac{x^2 + ax - 6a - 36}{x - 6} = - 5\\
+		&amp;\Leftrightarrow \lim\limits_{x \to 6} \dfrac{\left(x - 6\right)\left( x + 6 + a \right)}{x - 6} = - 5\\
+		&amp;\Leftrightarrow \lim\limits_{x \to 6}(x+6+a)=-5\\
+		&amp;\Leftrightarrow 12+a=-5
+	\end{align*} Suy ra $a=-17,b=66$. Vậy $-2a-b=-32$.</div></div></div>
+<div class="question"><div class="question-text"><div class="tp"><b>Câu 3:</b> Số khách hàng nam mua bảo hiểm ở từng độ tuổi được thống kê như sau: <div class="center"><div class="tp"><div class="table-responsive"><table class="tex-table bordered"><tr><td style="text-align:center">Độ tuổi</td><td style="text-align:center">$[20; 30)$</td><td style="text-align:center">$[30; 40)$</td><td style="text-align:center">$[40; 50)$</td><td style="text-align:center">$[50; 60)$</td><td style="text-align:center">$[60; 70)$</td></tr><tr><td style="text-align:center">Số khách hàng</td><td style="text-align:center">$5$</td><td style="text-align:center">$9$</td><td style="text-align:center">$15$</td><td style="text-align:center">$11$</td><td style="text-align:center">$4$</td></tr></table></div></div></div> Hãy sử dụng dữ liệu ở trên để tư vấn cho đại lí bảo hiểm xác định khách hàng nam ở tuổi nào hay mua bảo hiểm nhất.</div></div><div class="options"><div class="short-ans-group"><input type="text" class="short-ans-box" maxlength="1" id="P3_Cau_3_1" oninput="this.value=this.value.replace('.', ','); moveNext(this, 'P3_Cau_3_2')" onkeydown="movePrev(event, this, null)"><input type="text" class="short-ans-box" maxlength="1" id="P3_Cau_3_2" oninput="this.value=this.value.replace('.', ','); moveNext(this, 'P3_Cau_3_3')" onkeydown="movePrev(event, this, 'P3_Cau_3_1')"><input type="text" class="short-ans-box" maxlength="1" id="P3_Cau_3_3" oninput="this.value=this.value.replace('.', ','); moveNext(this, 'P3_Cau_3_4')" onkeydown="movePrev(event, this, 'P3_Cau_3_2')"><input type="text" class="short-ans-box" maxlength="1" id="P3_Cau_3_4" oninput="this.value=this.value.replace('.', ','); moveNext(this, null)" onkeydown="movePrev(event, this, 'P3_Cau_3_3')"></div></div><div class="solution-box"><div class="tp"><b>Lời giải chi tiết:</b> Dựa vào bảng số liệu, ta thấy $M_0\in [40; 50)$.<br> \[M_0=40+\dfrac{15-9}{(15-9)+(15-11)}\cdot(50-40)=46.\]</div></div></div>
+<div class="question"><div class="question-text"><div class="tp"><b>Câu 4:</b> Cho hình chóp $S.ABCD$ có đáy $ABCD$ là hình thang có hai đáy $AD$ và $BC$, gọi $M$ là trung điểm $SA$. Biết $BM$ song song với mặt phẳng $(SCD)$. Tính tỉ số $\dfrac{AD}{BC}$.</div></div><div class="options"><div class="short-ans-group"><input type="text" class="short-ans-box" maxlength="1" id="P3_Cau_4_1" oninput="this.value=this.value.replace('.', ','); moveNext(this, 'P3_Cau_4_2')" onkeydown="movePrev(event, this, null)"><input type="text" class="short-ans-box" maxlength="1" id="P3_Cau_4_2" oninput="this.value=this.value.replace('.', ','); moveNext(this, 'P3_Cau_4_3')" onkeydown="movePrev(event, this, 'P3_Cau_4_1')"><input type="text" class="short-ans-box" maxlength="1" id="P3_Cau_4_3" oninput="this.value=this.value.replace('.', ','); moveNext(this, 'P3_Cau_4_4')" onkeydown="movePrev(event, this, 'P3_Cau_4_2')"><input type="text" class="short-ans-box" maxlength="1" id="P3_Cau_4_4" oninput="this.value=this.value.replace('.', ','); moveNext(this, null)" onkeydown="movePrev(event, this, 'P3_Cau_4_3')"></div></div><div class="solution-box"><div class="tp"><b>Lời giải chi tiết:</b> <div class="center"><div class="tp"><div class="table-responsive figure" style="text-align:center;margin:10px 0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="199.935pt" height="226.291pt" viewBox="0 0 199.935 226.291" version="1.2">
+<defs>
+<g>
+<symbol overflow="visible" id="f5_glyph0-0">
+<path style="stroke:none;" d=""/>
+</symbol>
+<symbol overflow="visible" id="f5_glyph0-1">
+<path style="stroke:none;" d="M 2.03125 -1.328125 C 1.609375 -0.625 1.203125 -0.375 0.625 -0.34375 C 0.5 -0.328125 0.40625 -0.328125 0.40625 -0.125 C 0.40625 -0.046875 0.46875 0 0.546875 0 C 0.765625 0 1.296875 -0.03125 1.515625 -0.03125 C 1.859375 -0.03125 2.234375 0 2.578125 0 C 2.640625 0 2.796875 0 2.796875 -0.21875 C 2.796875 -0.328125 2.6875 -0.34375 2.625 -0.34375 C 2.34375 -0.375 2.125 -0.46875 2.125 -0.75 C 2.125 -0.921875 2.1875 -1.046875 2.34375 -1.3125 L 3.25 -2.8125 L 6.296875 -2.8125 C 6.3125 -2.703125 6.3125 -2.609375 6.3125 -2.5 C 6.359375 -2.1875 6.5 -0.953125 6.5 -0.734375 C 6.5 -0.375 5.890625 -0.34375 5.703125 -0.34375 C 5.5625 -0.34375 5.4375 -0.34375 5.4375 -0.125 C 5.4375 0 5.546875 0 5.609375 0 C 5.8125 0 6.0625 -0.03125 6.265625 -0.03125 L 6.9375 -0.03125 C 7.671875 -0.03125 8.1875 0 8.203125 0 C 8.28125 0 8.421875 0 8.421875 -0.21875 C 8.421875 -0.34375 8.3125 -0.34375 8.125 -0.34375 C 7.46875 -0.34375 7.46875 -0.453125 7.421875 -0.8125 L 6.703125 -8.25 C 6.671875 -8.484375 6.625 -8.515625 6.5 -8.515625 C 6.375 -8.515625 6.3125 -8.484375 6.203125 -8.3125 Z M 3.453125 -3.15625 L 5.859375 -7.171875 L 6.265625 -3.15625 Z M 3.453125 -3.15625 "/>
+</symbol>
+<symbol overflow="visible" id="f5_glyph0-2">
+<path style="stroke:none;" d="M 4.359375 -7.328125 C 4.46875 -7.765625 4.515625 -7.796875 4.984375 -7.796875 L 6.53125 -7.796875 C 7.875 -7.796875 7.875 -6.65625 7.875 -6.546875 C 7.875 -5.578125 6.921875 -4.34375 5.34375 -4.34375 L 3.625 -4.34375 Z M 6.375 -4.25 C 7.671875 -4.5 8.859375 -5.40625 8.859375 -6.5 C 8.859375 -7.421875 8.03125 -8.140625 6.6875 -8.140625 L 2.859375 -8.140625 C 2.640625 -8.140625 2.53125 -8.140625 2.53125 -7.921875 C 2.53125 -7.796875 2.640625 -7.796875 2.8125 -7.796875 C 3.546875 -7.796875 3.546875 -7.703125 3.546875 -7.578125 C 3.546875 -7.546875 3.546875 -7.46875 3.5 -7.296875 L 1.890625 -0.875 C 1.78125 -0.46875 1.75 -0.34375 0.921875 -0.34375 C 0.6875 -0.34375 0.578125 -0.34375 0.578125 -0.125 C 0.578125 0 0.640625 0 0.875 0 L 4.96875 0 C 6.796875 0 8.203125 -1.390625 8.203125 -2.59375 C 8.203125 -3.5625 7.34375 -4.15625 6.375 -4.25 Z M 4.6875 -0.34375 L 3.078125 -0.34375 C 2.90625 -0.34375 2.890625 -0.34375 2.8125 -0.359375 C 2.6875 -0.375 2.671875 -0.390625 2.671875 -0.484375 C 2.671875 -0.578125 2.6875 -0.640625 2.71875 -0.75 L 3.546875 -4.109375 L 5.796875 -4.109375 C 7.203125 -4.109375 7.203125 -2.796875 7.203125 -2.703125 C 7.203125 -1.5625 6.15625 -0.34375 4.6875 -0.34375 Z M 4.6875 -0.34375 "/>
+</symbol>
+<symbol overflow="visible" id="f5_glyph0-3">
+<path style="stroke:none;" d="M 8.90625 -8.28125 C 8.90625 -8.390625 8.828125 -8.390625 8.796875 -8.390625 C 8.78125 -8.390625 8.734375 -8.390625 8.625 -8.28125 L 7.8125 -7.265625 C 7.390625 -7.984375 6.734375 -8.390625 5.84375 -8.390625 C 3.265625 -8.390625 0.59375 -5.78125 0.59375 -2.984375 C 0.59375 -0.984375 1.984375 0.25 3.734375 0.25 C 4.6875 0.25 5.515625 -0.15625 6.21875 -0.734375 C 7.25 -1.609375 7.5625 -2.765625 7.5625 -2.859375 C 7.5625 -2.96875 7.46875 -2.96875 7.421875 -2.96875 C 7.3125 -2.96875 7.3125 -2.890625 7.28125 -2.84375 C 6.734375 -0.984375 5.125 -0.09375 3.9375 -0.09375 C 2.671875 -0.09375 1.578125 -0.90625 1.578125 -2.59375 C 1.578125 -2.984375 1.6875 -5.0625 3.046875 -6.609375 C 3.703125 -7.375 4.8125 -8.046875 5.953125 -8.046875 C 7.265625 -8.046875 7.84375 -6.96875 7.84375 -5.75 C 7.84375 -5.4375 7.8125 -5.171875 7.8125 -5.125 C 7.8125 -5.015625 7.921875 -5.015625 7.96875 -5.015625 C 8.09375 -5.015625 8.109375 -5.03125 8.15625 -5.25 Z M 8.90625 -8.28125 "/>
+</symbol>
+<symbol overflow="visible" id="f5_glyph0-4">
+<path style="stroke:none;" d="M 1.875 -0.875 C 1.765625 -0.46875 1.734375 -0.34375 0.90625 -0.34375 C 0.671875 -0.34375 0.5625 -0.34375 0.5625 -0.125 C 0.5625 0 0.625 0 0.875 0 L 4.65625 0 C 7.0625 0 9.40625 -2.484375 9.40625 -5.15625 C 9.40625 -6.859375 8.375 -8.140625 6.671875 -8.140625 L 2.84375 -8.140625 C 2.625 -8.140625 2.515625 -8.140625 2.515625 -7.921875 C 2.515625 -7.796875 2.625 -7.796875 2.796875 -7.796875 C 3.53125 -7.796875 3.53125 -7.703125 3.53125 -7.578125 C 3.53125 -7.546875 3.53125 -7.46875 3.484375 -7.296875 Z M 4.390625 -7.328125 C 4.5 -7.765625 4.546875 -7.796875 5 -7.796875 L 6.3125 -7.796875 C 7.4375 -7.796875 8.46875 -7.1875 8.46875 -5.546875 C 8.46875 -4.953125 8.21875 -2.875 7.0625 -1.5625 C 6.734375 -1.171875 5.828125 -0.34375 4.453125 -0.34375 L 3.09375 -0.34375 C 2.9375 -0.34375 2.90625 -0.34375 2.84375 -0.359375 C 2.703125 -0.375 2.6875 -0.390625 2.6875 -0.484375 C 2.6875 -0.578125 2.71875 -0.640625 2.734375 -0.75 Z M 4.390625 -7.328125 "/>
+</symbol>
+<symbol overflow="visible" id="f5_glyph0-5">
+<path style="stroke:none;" d="M 7.578125 -8.28125 C 7.578125 -8.390625 7.484375 -8.390625 7.46875 -8.390625 C 7.421875 -8.390625 7.40625 -8.375 7.265625 -8.203125 C 7.1875 -8.125 6.703125 -7.5 6.6875 -7.484375 C 6.296875 -8.265625 5.515625 -8.390625 5 -8.390625 C 3.5 -8.390625 2.125 -7.015625 2.125 -5.65625 C 2.125 -4.765625 2.65625 -4.25 3.25 -4.046875 C 3.375 -4 4.078125 -3.796875 4.4375 -3.71875 C 5.046875 -3.546875 5.203125 -3.5 5.453125 -3.25 C 5.5 -3.1875 5.734375 -2.90625 5.734375 -2.34375 C 5.734375 -1.234375 4.703125 -0.09375 3.515625 -0.09375 C 2.546875 -0.09375 1.453125 -0.515625 1.453125 -1.84375 C 1.453125 -2.078125 1.5 -2.359375 1.53125 -2.484375 C 1.53125 -2.515625 1.546875 -2.578125 1.546875 -2.59375 C 1.546875 -2.640625 1.53125 -2.703125 1.4375 -2.703125 C 1.328125 -2.703125 1.3125 -2.6875 1.265625 -2.484375 L 0.65625 -0.03125 C 0.65625 -0.03125 0.609375 0.125 0.609375 0.140625 C 0.609375 0.25 0.703125 0.25 0.734375 0.25 C 0.78125 0.25 0.78125 0.234375 0.9375 0.0625 L 1.484375 -0.65625 C 1.765625 -0.21875 2.390625 0.25 3.5 0.25 C 5.03125 0.25 6.4375 -1.234375 6.4375 -2.734375 C 6.4375 -3.234375 6.3125 -3.671875 5.859375 -4.109375 C 5.609375 -4.359375 5.40625 -4.421875 4.296875 -4.703125 C 3.5 -4.921875 3.390625 -4.953125 3.1875 -5.15625 C 2.984375 -5.359375 2.828125 -5.640625 2.828125 -6.046875 C 2.828125 -7.046875 3.84375 -8.078125 4.96875 -8.078125 C 6.140625 -8.078125 6.6875 -7.359375 6.6875 -6.21875 C 6.6875 -5.90625 6.625 -5.59375 6.625 -5.546875 C 6.625 -5.4375 6.71875 -5.4375 6.765625 -5.4375 C 6.859375 -5.4375 6.875 -5.46875 6.921875 -5.65625 Z M 7.578125 -8.28125 "/>
+</symbol>
+<symbol overflow="visible" id="f5_glyph0-6">
+<path style="stroke:none;" d="M 10.828125 -7.265625 C 10.9375 -7.671875 10.953125 -7.796875 11.796875 -7.796875 C 12.03125 -7.796875 12.140625 -7.796875 12.140625 -8.015625 C 12.140625 -8.140625 12.046875 -8.140625 11.828125 -8.140625 L 10.390625 -8.140625 C 10.09375 -8.140625 10.078125 -8.125 9.953125 -7.9375 L 5.609375 -1.0625 L 4.703125 -7.875 C 4.671875 -8.140625 4.65625 -8.140625 4.34375 -8.140625 L 2.875 -8.140625 C 2.640625 -8.140625 2.546875 -8.140625 2.546875 -7.921875 C 2.546875 -7.796875 2.640625 -7.796875 2.828125 -7.796875 C 3.546875 -7.796875 3.546875 -7.703125 3.546875 -7.578125 C 3.546875 -7.546875 3.546875 -7.46875 3.5 -7.296875 L 1.984375 -1.21875 C 1.84375 -0.640625 1.5625 -0.375 0.765625 -0.34375 C 0.734375 -0.34375 0.578125 -0.328125 0.578125 -0.125 C 0.578125 0 0.6875 0 0.734375 0 C 0.984375 0 1.578125 -0.03125 1.828125 -0.03125 L 2.390625 -0.03125 C 2.5625 -0.03125 2.765625 0 2.9375 0 C 3.015625 0 3.140625 0 3.140625 -0.21875 C 3.140625 -0.328125 3.03125 -0.34375 2.984375 -0.34375 C 2.59375 -0.359375 2.203125 -0.421875 2.203125 -0.859375 C 2.203125 -0.984375 2.203125 -0.984375 2.25 -1.15625 L 3.90625 -7.71875 L 4.90625 -0.328125 C 4.9375 -0.03125 4.953125 0 5.0625 0 C 5.1875 0 5.25 -0.09375 5.3125 -0.203125 L 10.09375 -7.78125 L 10.109375 -7.78125 L 8.375 -0.875 C 8.28125 -0.46875 8.25 -0.34375 7.421875 -0.34375 C 7.1875 -0.34375 7.0625 -0.34375 7.0625 -0.125 C 7.0625 0 7.171875 0 7.25 0 C 7.453125 0 7.6875 -0.03125 7.890625 -0.03125 L 9.296875 -0.03125 C 9.5 -0.03125 9.75 0 9.953125 0 C 10.046875 0 10.1875 0 10.1875 -0.21875 C 10.1875 -0.34375 10.078125 -0.34375 9.890625 -0.34375 C 9.171875 -0.34375 9.171875 -0.4375 9.171875 -0.5625 C 9.171875 -0.578125 9.171875 -0.65625 9.1875 -0.75 Z M 10.828125 -7.265625 "/>
+</symbol>
+<symbol overflow="visible" id="f5_glyph0-7">
+<path style="stroke:none;" d="M 8.828125 -6.890625 C 8.953125 -7.40625 9.140625 -7.765625 10.046875 -7.796875 C 10.078125 -7.796875 10.234375 -7.8125 10.234375 -8.015625 C 10.234375 -8.140625 10.125 -8.140625 10.078125 -8.140625 C 9.828125 -8.140625 9.234375 -8.125 8.984375 -8.125 L 8.421875 -8.125 C 8.25 -8.125 8.03125 -8.140625 7.875 -8.140625 C 7.796875 -8.140625 7.65625 -8.140625 7.65625 -7.921875 C 7.65625 -7.796875 7.75 -7.796875 7.828125 -7.796875 C 8.546875 -7.765625 8.59375 -7.5 8.59375 -7.28125 C 8.59375 -7.171875 8.578125 -7.140625 8.546875 -6.96875 L 7.203125 -1.59375 L 4.65625 -7.9375 C 4.5625 -8.125 4.546875 -8.140625 4.296875 -8.140625 L 2.84375 -8.140625 C 2.59375 -8.140625 2.484375 -8.140625 2.484375 -7.921875 C 2.484375 -7.796875 2.578125 -7.796875 2.796875 -7.796875 C 2.859375 -7.796875 3.5625 -7.796875 3.5625 -7.6875 C 3.5625 -7.671875 3.546875 -7.578125 3.53125 -7.53125 L 1.9375 -1.21875 C 1.796875 -0.625 1.515625 -0.375 0.734375 -0.34375 C 0.671875 -0.34375 0.546875 -0.328125 0.546875 -0.125 C 0.546875 0 0.671875 0 0.703125 0 C 0.9375 0 1.546875 -0.03125 1.78125 -0.03125 L 2.359375 -0.03125 C 2.53125 -0.03125 2.734375 0 2.890625 0 C 2.984375 0 3.109375 0 3.109375 -0.21875 C 3.109375 -0.328125 3 -0.34375 2.9375 -0.34375 C 2.546875 -0.359375 2.171875 -0.421875 2.171875 -0.859375 C 2.171875 -0.953125 2.1875 -1.0625 2.21875 -1.15625 L 3.828125 -7.53125 C 3.90625 -7.421875 3.90625 -7.390625 3.953125 -7.28125 L 6.78125 -0.21875 C 6.84375 -0.078125 6.859375 0 6.96875 0 C 7.09375 0 7.109375 -0.03125 7.15625 -0.234375 Z M 8.828125 -6.890625 "/>
+</symbol>
+</g>
+</defs>
+<g id="f5_surface1">
+<path style="fill:none;stroke-width:0.3985;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-dasharray:2.98883,2.98883;stroke-miterlimit:10;" d="M 0.000951116 0.00121066 L 141.732691 0.00121066 M 100.815831 64.229161 L 29.949961 64.229161 " transform="matrix(0.996877,0,0,-0.996877,19.999052,147.469957)"/>
+<path style="fill:none;stroke-width:0.3985;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 0.000951116 0.00121066 L 35.431927 -61.374079 L 106.301715 -61.374079 L 141.732691 0.00121066 M 35.431927 -61.374079 L 59.898971 128.453192 M 106.301715 -61.374079 L 59.898971 128.453192 M 141.732691 0.00121066 L 59.898971 128.453192 M 0.000951116 0.00121066 L 59.898971 128.453192 M 35.431927 -61.374079 L 29.949961 64.229161 M 106.301715 -61.374079 L 100.815831 64.229161 " transform="matrix(0.996877,0,0,-0.996877,19.999052,147.469957)"/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 20.992188 147.46875 C 20.992188 146.921875 20.546875 146.476563 20 146.476563 C 19.449219 146.476563 19.007813 146.921875 19.007813 147.46875 C 19.007813 148.019531 19.449219 148.464844 20 148.464844 C 20.546875 148.464844 20.992188 148.019531 20.992188 147.46875 Z M 20.992188 147.46875 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f5_glyph0-1" x="7.147318" y="151.541201"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 56.316406 208.652344 C 56.316406 208.101563 55.871094 207.65625 55.320313 207.65625 C 54.773438 207.65625 54.328125 208.101563 54.328125 208.652344 C 54.328125 209.199219 54.773438 209.644531 55.320313 209.644531 C 55.871094 209.644531 56.316406 209.199219 56.316406 208.652344 Z M 56.316406 208.652344 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f5_glyph0-2" x="44.593993" y="218.716731"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 126.960938 208.652344 C 126.960938 208.101563 126.515625 207.65625 125.96875 207.65625 C 125.417969 207.65625 124.972656 208.101563 124.972656 208.652344 C 124.972656 209.199219 125.417969 209.644531 125.96875 209.644531 C 126.515625 209.644531 126.960938 209.199219 126.960938 208.652344 Z M 126.960938 208.652344 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f5_glyph0-3" x="127.35868" y="218.716731"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 162.285156 147.46875 C 162.285156 146.921875 161.839844 146.476563 161.289063 146.476563 C 160.742188 146.476563 160.296875 146.921875 160.296875 147.46875 C 160.296875 148.019531 160.742188 148.464844 161.289063 148.464844 C 161.839844 148.464844 162.285156 148.019531 162.285156 147.46875 Z M 162.285156 147.46875 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f5_glyph0-4" x="164.759498" y="151.541201"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 80.707031 19.417969 C 80.707031 18.867188 80.261719 18.421875 79.710938 18.421875 C 79.164063 18.421875 78.71875 18.867188 78.71875 19.417969 C 78.71875 19.964844 79.164063 20.410156 79.710938 20.410156 C 80.261719 20.410156 80.707031 19.964844 80.707031 19.417969 Z M 80.707031 19.417969 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f5_glyph0-5" x="75.776294" y="15.011966"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 50.847656 83.441406 C 50.847656 82.894531 50.402344 82.449219 49.855469 82.449219 C 49.308594 82.449219 48.863281 82.894531 48.863281 83.441406 C 48.863281 83.992188 49.308594 84.4375 49.855469 84.4375 C 50.402344 84.4375 50.847656 83.992188 50.847656 83.441406 Z M 50.847656 83.441406 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f5_glyph0-6" x="36.246148" y="83.277082"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 121.496094 83.441406 C 121.496094 82.894531 121.050781 82.449219 120.5 82.449219 C 119.953125 82.449219 119.507813 82.894531 119.507813 83.441406 C 119.507813 83.992188 119.953125 84.4375 120.5 84.4375 C 121.050781 84.4375 121.496094 83.992188 121.496094 83.441406 Z M 121.496094 83.441406 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f5_glyph0-7" x="121.199976" y="81.520585"/>
+</g>
+</g>
+</svg></div></div></div> Gọi $N$ là trung điểm của $SD$.<br> Ta có $MN$ là đường trung bình của $\triangle SAD$ suy ra $MN=\dfrac{1}{2} AD$ và $MN\parallel AD$.&emsp;(1)<br> Mà $BC\parallel AD$ (do tứ giác $ABCD$ là hình thang có hai cạnh đáy là $AD$ và $BC$).&emsp;(2)<br> Từ (1) và (2) suy ra tứ giác $BCNM$ là hình thang.&emsp;(*)<br> Mặt khác $\left\{\begin{aligned}&amp;BM\parallel (SCD)\text{(giả thiết)}\\&amp;BM\subset(BCNM)\\&amp;(BCNM)\cap(SCD)=CN\end{aligned}\right.\Rightarrow BM\parallel CN$.&emsp;(**)<br> Từ (*) và (**) suy ra tứ giác $BCNM$ là hình bình hành. <br> Suy ra $BC=MN=\dfrac{1}{2}AD$ hay $\dfrac{AD}{BC}=2$.</div></div></div>
+<div class="question"><div class="question-text"><div class="tp"><b>Câu 5:</b> Để đánh giá thói quen sử dụng điện thoại, Văn phòng Đoàn trường THPT Nguyễn Du đã khảo sát $40$ học sinh. Thời gian sử dụng điện thoại trong ngày của các học sinh này được thống kê ở bảng dưới đây <div class="center"><div class="tp"><div class="table-responsive"><table class="tex-table bordered"><tr><td style="text-align:center">Số giờ sử dụng</td><td style="text-align:center">$[1;3)$</td><td style="text-align:center">$[3;5)$</td><td style="text-align:center">$[5;7)$</td><td style="text-align:center">$[7;9)$</td><td style="text-align:center">$[9;11]$</td></tr><tr><td style="text-align:center">Số học sinh</td><td style="text-align:center">$10$</td><td style="text-align:center">$4$</td><td style="text-align:center">$12$</td><td style="text-align:center">$8$</td><td style="text-align:center">$6$</td></tr></table></div></div></div> Dựa vào bảng số liệu, hãy ước lượng mốt của mẫu số liệu ghép nhóm. (Kết quả làm tròn ở hàng phần trăm).</div></div><div class="options"><div class="short-ans-group"><input type="text" class="short-ans-box" maxlength="1" id="P3_Cau_5_1" oninput="this.value=this.value.replace('.', ','); moveNext(this, 'P3_Cau_5_2')" onkeydown="movePrev(event, this, null)"><input type="text" class="short-ans-box" maxlength="1" id="P3_Cau_5_2" oninput="this.value=this.value.replace('.', ','); moveNext(this, 'P3_Cau_5_3')" onkeydown="movePrev(event, this, 'P3_Cau_5_1')"><input type="text" class="short-ans-box" maxlength="1" id="P3_Cau_5_3" oninput="this.value=this.value.replace('.', ','); moveNext(this, 'P3_Cau_5_4')" onkeydown="movePrev(event, this, 'P3_Cau_5_2')"><input type="text" class="short-ans-box" maxlength="1" id="P3_Cau_5_4" oninput="this.value=this.value.replace('.', ','); moveNext(this, null)" onkeydown="movePrev(event, this, 'P3_Cau_5_3')"></div></div><div class="solution-box"><div class="tp"><b>Lời giải chi tiết:</b> Nhóm chứa mốt là $[5,7)$. Do đó $$M_o=5+\dfrac{12-4}{(12-4)+(12-8)}(7-5)\approx 6,33.$$</div></div></div>
+<div class="question"><div class="question-text"><div class="tp"><b>Câu 6:</b> Cho hình chóp $S.ABCD$ có đáy $ABCD$ là hình bình hành với $AB=2AD=4$, $\widehat{BAD}=150^\circ$. Gọi $M$ điểm thuộc cạnh $SB$ và $SM=2MB$. Mặt $(P)$ qua $M$ song song với $(ABC)$ cắt các cạnh $SC$, $SD$, $SA$ lần lượt tại $N$, $P$, $Q$. Khi đó diện tích tứ giác MNQP bằng bao nhiêu? (làm tròn kết quả đến hàng phần chục).</div></div><div class="options"><div class="short-ans-group"><input type="text" class="short-ans-box" maxlength="1" id="P3_Cau_6_1" oninput="this.value=this.value.replace('.', ','); moveNext(this, 'P3_Cau_6_2')" onkeydown="movePrev(event, this, null)"><input type="text" class="short-ans-box" maxlength="1" id="P3_Cau_6_2" oninput="this.value=this.value.replace('.', ','); moveNext(this, 'P3_Cau_6_3')" onkeydown="movePrev(event, this, 'P3_Cau_6_1')"><input type="text" class="short-ans-box" maxlength="1" id="P3_Cau_6_3" oninput="this.value=this.value.replace('.', ','); moveNext(this, 'P3_Cau_6_4')" onkeydown="movePrev(event, this, 'P3_Cau_6_2')"><input type="text" class="short-ans-box" maxlength="1" id="P3_Cau_6_4" oninput="this.value=this.value.replace('.', ','); moveNext(this, null)" onkeydown="movePrev(event, this, 'P3_Cau_6_3')"></div></div><div class="solution-box"><div class="tp"><b>Lời giải chi tiết:</b> Ta có $(MNPQ) \parallel (ABCD)$ nên \begin{align*}
+			MQ &amp;= (SAB) \cap (P) \Rightarrow MQ \parallel AB \\
+			MN &amp;= (SBC) \cap (P) \Rightarrow MN \parallel BC \\
+			PQ &amp;= (SAD) \cap (P) \Rightarrow PQ \parallel AD \\
+			NP &amp;= (SCD) \cap (P) \Rightarrow NP \parallel CD.
+		\end{align*} Vì $ABCD$ là hình bình hành nên $MNPQ$ cũng là hình bình hành.<br> Áp dụng định lí Thales <br> \[\dfrac{MQ}{AB} = \dfrac{SM}{SB} = \dfrac{2}{3} \] \[\dfrac{QP}{AD} = \dfrac{SQ}{SA} = \dfrac{SM}{SB} = \dfrac{2}{3} \] \begin{align*}
+			S_{MNPQ} &amp;= 2 \cdot S_{\triangle MQP} = 2 \cdot \frac{1}{2} \cdot MQ \cdot QP \cdot \sin \widehat{MQP} \\
+			&amp;= 1 \cdot \left(\frac{2}{3} \cdot 4\right) \cdot \left(\frac{2}{3} \cdot 2\right) \cdot \sin 150^\circ \\
+			&amp;= \left( \frac{8}{3} \right) \cdot \left( \frac{4}{3} \right) \cdot \frac{1}{2} \\
+			&amp;= \dfrac{32}{9} \cdot \dfrac{1}{2} \\
+			&amp;= \dfrac{16}{9}\approx 1{,}8.
+		\end{align*}</div><div class="tp"><div class="center"><div class="tp"><div class="table-responsive figure" style="text-align:center;margin:10px 0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="209.159pt" height="176.494pt" viewBox="0 0 209.159 176.494" version="1.2">
+<defs>
+<g>
+<symbol overflow="visible" id="f6_glyph0-0">
+<path style="stroke:none;" d=""/>
+</symbol>
+<symbol overflow="visible" id="f6_glyph0-1">
+<path style="stroke:none;" d="M 1.78125 -1.140625 C 1.375 -0.46875 0.984375 -0.34375 0.5625 -0.3125 C 0.4375 -0.296875 0.34375 -0.296875 0.34375 -0.109375 C 0.34375 -0.046875 0.390625 0 0.46875 0 C 0.75 0 1.046875 -0.03125 1.328125 -0.03125 C 1.65625 -0.03125 2 0 2.328125 0 C 2.375 0 2.515625 0 2.515625 -0.1875 C 2.515625 -0.296875 2.421875 -0.3125 2.34375 -0.3125 C 2.125 -0.328125 1.890625 -0.40625 1.890625 -0.65625 C 1.890625 -0.78125 1.9375 -0.890625 2.03125 -1.015625 L 2.78125 -2.296875 L 5.265625 -2.296875 C 5.28125 -2.078125 5.421875 -0.734375 5.421875 -0.640625 C 5.421875 -0.34375 4.90625 -0.3125 4.71875 -0.3125 C 4.578125 -0.3125 4.46875 -0.3125 4.46875 -0.109375 C 4.46875 0 4.59375 0 4.609375 0 C 5.015625 0 5.453125 -0.03125 5.859375 -0.03125 C 6.109375 -0.03125 6.734375 0 6.96875 0 C 7.03125 0 7.15625 0 7.15625 -0.203125 C 7.15625 -0.3125 7.046875 -0.3125 6.921875 -0.3125 C 6.3125 -0.3125 6.3125 -0.375 6.28125 -0.671875 L 5.671875 -6.859375 C 5.65625 -7.0625 5.65625 -7.109375 5.484375 -7.109375 C 5.328125 -7.109375 5.28125 -7.03125 5.234375 -6.9375 Z M 2.96875 -2.59375 L 4.921875 -5.875 L 5.234375 -2.59375 Z M 2.96875 -2.59375 "/>
+</symbol>
+<symbol overflow="visible" id="f6_glyph0-2">
+<path style="stroke:none;" d="M 1.59375 -0.78125 C 1.484375 -0.390625 1.46875 -0.3125 0.6875 -0.3125 C 0.515625 -0.3125 0.421875 -0.3125 0.421875 -0.109375 C 0.421875 0 0.5 0 0.6875 0 L 4.234375 0 C 5.796875 0 6.96875 -1.171875 6.96875 -2.140625 C 6.96875 -2.859375 6.390625 -3.4375 5.421875 -3.546875 C 6.453125 -3.734375 7.5 -4.46875 7.5 -5.40625 C 7.5 -6.140625 6.84375 -6.78125 5.65625 -6.78125 L 2.328125 -6.78125 C 2.140625 -6.78125 2.03125 -6.78125 2.03125 -6.578125 C 2.03125 -6.46875 2.125 -6.46875 2.3125 -6.46875 C 2.328125 -6.46875 2.515625 -6.46875 2.6875 -6.453125 C 2.875 -6.421875 2.953125 -6.421875 2.953125 -6.296875 C 2.953125 -6.25 2.953125 -6.21875 2.921875 -6.109375 Z M 3.078125 -3.625 L 3.703125 -6.09375 C 3.796875 -6.4375 3.8125 -6.46875 4.234375 -6.46875 L 5.515625 -6.46875 C 6.390625 -6.46875 6.59375 -5.890625 6.59375 -5.453125 C 6.59375 -4.578125 5.75 -3.625 4.53125 -3.625 Z M 2.640625 -0.3125 C 2.5 -0.3125 2.484375 -0.3125 2.421875 -0.3125 C 2.328125 -0.328125 2.296875 -0.34375 2.296875 -0.421875 C 2.296875 -0.453125 2.296875 -0.46875 2.34375 -0.640625 L 3.03125 -3.40625 L 4.90625 -3.40625 C 5.859375 -3.40625 6.046875 -2.671875 6.046875 -2.25 C 6.046875 -1.265625 5.15625 -0.3125 3.984375 -0.3125 Z M 2.640625 -0.3125 "/>
+</symbol>
+<symbol overflow="visible" id="f6_glyph0-3">
+<path style="stroke:none;" d="M 7.546875 -6.890625 C 7.546875 -6.921875 7.515625 -7 7.4375 -7 C 7.40625 -7 7.390625 -6.984375 7.28125 -6.875 L 6.59375 -6.109375 C 6.5 -6.25 6.046875 -7 4.9375 -7 C 2.734375 -7 0.5 -4.796875 0.5 -2.5 C 0.5 -0.859375 1.671875 0.21875 3.1875 0.21875 C 4.046875 0.21875 4.796875 -0.171875 5.328125 -0.640625 C 6.25 -1.453125 6.421875 -2.34375 6.421875 -2.375 C 6.421875 -2.484375 6.3125 -2.484375 6.296875 -2.484375 C 6.234375 -2.484375 6.1875 -2.453125 6.171875 -2.375 C 6.078125 -2.09375 5.859375 -1.390625 5.171875 -0.8125 C 4.484375 -0.265625 3.859375 -0.09375 3.34375 -0.09375 C 2.453125 -0.09375 1.40625 -0.609375 1.40625 -2.15625 C 1.40625 -2.71875 1.609375 -4.328125 2.59375 -5.484375 C 3.203125 -6.1875 4.140625 -6.6875 5.015625 -6.6875 C 6.03125 -6.6875 6.625 -5.921875 6.625 -4.765625 C 6.625 -4.375 6.59375 -4.359375 6.59375 -4.265625 C 6.59375 -4.171875 6.703125 -4.171875 6.734375 -4.171875 C 6.859375 -4.171875 6.859375 -4.1875 6.921875 -4.359375 Z M 7.546875 -6.890625 "/>
+</symbol>
+<symbol overflow="visible" id="f6_glyph0-4">
+<path style="stroke:none;" d="M 1.578125 -0.78125 C 1.484375 -0.390625 1.453125 -0.3125 0.671875 -0.3125 C 0.5 -0.3125 0.390625 -0.3125 0.390625 -0.125 C 0.390625 0 0.484375 0 0.671875 0 L 3.953125 0 C 6.015625 0 7.984375 -2.09375 7.984375 -4.265625 C 7.984375 -5.671875 7.140625 -6.78125 5.640625 -6.78125 L 2.3125 -6.78125 C 2.125 -6.78125 2.015625 -6.78125 2.015625 -6.59375 C 2.015625 -6.46875 2.109375 -6.46875 2.296875 -6.46875 C 2.4375 -6.46875 2.609375 -6.453125 2.734375 -6.453125 C 2.890625 -6.421875 2.953125 -6.40625 2.953125 -6.296875 C 2.953125 -6.25 2.9375 -6.21875 2.90625 -6.109375 Z M 3.71875 -6.09375 C 3.8125 -6.4375 3.828125 -6.46875 4.25 -6.46875 L 5.3125 -6.46875 C 6.296875 -6.46875 7.109375 -5.9375 7.109375 -4.640625 C 7.109375 -4.140625 6.921875 -2.515625 6.078125 -1.421875 C 5.78125 -1.0625 5 -0.3125 3.78125 -0.3125 L 2.65625 -0.3125 C 2.515625 -0.3125 2.5 -0.3125 2.4375 -0.3125 C 2.34375 -0.328125 2.3125 -0.34375 2.3125 -0.421875 C 2.3125 -0.453125 2.3125 -0.46875 2.359375 -0.640625 Z M 3.71875 -6.09375 "/>
+</symbol>
+<symbol overflow="visible" id="f6_glyph0-5">
+<path style="stroke:none;" d="M 6.40625 -6.890625 C 6.40625 -6.921875 6.375 -7 6.296875 -7 C 6.234375 -7 6.234375 -6.984375 6.109375 -6.84375 L 5.640625 -6.28125 C 5.375 -6.75 4.859375 -7 4.21875 -7 C 2.953125 -7 1.765625 -5.859375 1.765625 -4.65625 C 1.765625 -3.84375 2.296875 -3.390625 2.796875 -3.25 L 3.859375 -2.96875 C 4.234375 -2.875 4.765625 -2.734375 4.765625 -1.921875 C 4.765625 -1.015625 3.953125 -0.09375 2.984375 -0.09375 C 2.34375 -0.09375 1.25 -0.3125 1.25 -1.53125 C 1.25 -1.78125 1.296875 -2.015625 1.3125 -2.078125 C 1.3125 -2.109375 1.328125 -2.125 1.328125 -2.140625 C 1.328125 -2.25 1.265625 -2.25 1.203125 -2.25 C 1.15625 -2.25 1.140625 -2.25 1.109375 -2.21875 C 1.078125 -2.171875 0.515625 0.09375 0.515625 0.125 C 0.515625 0.171875 0.5625 0.21875 0.625 0.21875 C 0.671875 0.21875 0.6875 0.203125 0.796875 0.0625 L 1.296875 -0.5 C 1.71875 0.078125 2.390625 0.21875 2.96875 0.21875 C 4.3125 0.21875 5.484375 -1.09375 5.484375 -2.328125 C 5.484375 -3.015625 5.15625 -3.359375 5 -3.5 C 4.765625 -3.71875 4.625 -3.765625 3.734375 -3.984375 C 3.515625 -4.046875 3.171875 -4.140625 3.078125 -4.171875 C 2.8125 -4.25 2.46875 -4.546875 2.46875 -5.0625 C 2.46875 -5.875 3.265625 -6.71875 4.203125 -6.71875 C 5.03125 -6.71875 5.640625 -6.296875 5.640625 -5.171875 C 5.640625 -4.859375 5.59375 -4.6875 5.59375 -4.625 C 5.59375 -4.609375 5.59375 -4.53125 5.71875 -4.53125 C 5.8125 -4.53125 5.828125 -4.546875 5.859375 -4.71875 Z M 6.40625 -6.890625 "/>
+</symbol>
+<symbol overflow="visible" id="f6_glyph0-6">
+<path style="stroke:none;" d="M 9.1875 -6.015625 C 9.28125 -6.375 9.296875 -6.46875 10.046875 -6.46875 C 10.265625 -6.46875 10.359375 -6.46875 10.359375 -6.671875 C 10.359375 -6.78125 10.265625 -6.78125 10.09375 -6.78125 L 8.78125 -6.78125 C 8.515625 -6.78125 8.515625 -6.78125 8.390625 -6.59375 L 4.765625 -0.9375 L 4 -6.546875 C 3.96875 -6.78125 3.953125 -6.78125 3.6875 -6.78125 L 2.328125 -6.78125 C 2.140625 -6.78125 2.03125 -6.78125 2.03125 -6.59375 C 2.03125 -6.46875 2.125 -6.46875 2.328125 -6.46875 C 2.453125 -6.46875 2.625 -6.453125 2.75 -6.453125 C 2.90625 -6.421875 2.96875 -6.40625 2.96875 -6.296875 C 2.96875 -6.25 2.953125 -6.21875 2.921875 -6.109375 L 1.671875 -1.046875 C 1.5625 -0.65625 1.40625 -0.34375 0.59375 -0.3125 C 0.546875 -0.3125 0.421875 -0.296875 0.421875 -0.125 C 0.421875 -0.03125 0.46875 0 0.5625 0 C 0.875 0 1.21875 -0.03125 1.546875 -0.03125 C 1.890625 -0.03125 2.25 0 2.5625 0 C 2.625 0 2.75 0 2.75 -0.203125 C 2.75 -0.3125 2.640625 -0.3125 2.5625 -0.3125 C 2 -0.3125 1.890625 -0.515625 1.890625 -0.75 C 1.890625 -0.8125 1.90625 -0.859375 1.9375 -0.96875 L 3.28125 -6.375 L 3.296875 -6.375 L 4.140625 -0.234375 C 4.171875 -0.109375 4.171875 0 4.296875 0 C 4.40625 0 4.46875 -0.109375 4.515625 -0.171875 L 8.515625 -6.453125 L 8.53125 -6.453125 L 7.109375 -0.78125 C 7.015625 -0.390625 7 -0.3125 6.21875 -0.3125 C 6.046875 -0.3125 5.9375 -0.3125 5.9375 -0.125 C 5.9375 0 6.046875 0 6.078125 0 C 6.359375 0 7.03125 -0.03125 7.3125 -0.03125 C 7.71875 -0.03125 8.140625 0 8.546875 0 C 8.609375 0 8.734375 0 8.734375 -0.203125 C 8.734375 -0.3125 8.65625 -0.3125 8.46875 -0.3125 C 8.09375 -0.3125 7.8125 -0.3125 7.8125 -0.484375 C 7.8125 -0.53125 7.8125 -0.546875 7.875 -0.71875 Z M 9.1875 -6.015625 "/>
+</symbol>
+<symbol overflow="visible" id="f6_glyph0-7">
+<path style="stroke:none;" d="M 7.5 -5.734375 C 7.59375 -6.125 7.78125 -6.4375 8.578125 -6.46875 C 8.625 -6.46875 8.734375 -6.484375 8.734375 -6.671875 C 8.734375 -6.671875 8.734375 -6.78125 8.609375 -6.78125 C 8.28125 -6.78125 7.9375 -6.75 7.609375 -6.75 C 7.265625 -6.75 6.921875 -6.78125 6.59375 -6.78125 C 6.53125 -6.78125 6.421875 -6.78125 6.421875 -6.578125 C 6.421875 -6.46875 6.515625 -6.46875 6.59375 -6.46875 C 7.15625 -6.453125 7.265625 -6.25 7.265625 -6.03125 C 7.265625 -6 7.25 -5.859375 7.25 -5.828125 L 6.125 -1.40625 L 3.9375 -6.59375 C 3.859375 -6.765625 3.84375 -6.78125 3.625 -6.78125 L 2.296875 -6.78125 C 2.09375 -6.78125 2 -6.78125 2 -6.578125 C 2 -6.46875 2.09375 -6.46875 2.28125 -6.46875 C 2.328125 -6.46875 2.953125 -6.46875 2.953125 -6.375 L 1.625 -1.046875 C 1.53125 -0.65625 1.359375 -0.34375 0.5625 -0.3125 C 0.5 -0.3125 0.390625 -0.296875 0.390625 -0.109375 C 0.390625 -0.046875 0.4375 0 0.515625 0 C 0.828125 0 1.1875 -0.03125 1.515625 -0.03125 C 1.84375 -0.03125 2.203125 0 2.53125 0 C 2.578125 0 2.703125 0 2.703125 -0.203125 C 2.703125 -0.296875 2.625 -0.3125 2.515625 -0.3125 C 1.9375 -0.328125 1.859375 -0.546875 1.859375 -0.75 C 1.859375 -0.8125 1.859375 -0.859375 1.890625 -0.96875 L 3.203125 -6.21875 C 3.25 -6.15625 3.25 -6.125 3.296875 -6.03125 L 5.765625 -0.1875 C 5.828125 -0.015625 5.859375 0 5.953125 0 C 6.0625 0 6.0625 -0.03125 6.109375 -0.203125 Z M 7.5 -5.734375 "/>
+</symbol>
+<symbol overflow="visible" id="f6_glyph0-8">
+<path style="stroke:none;" d="M 3 -3.140625 L 4.6875 -3.140625 C 6.109375 -3.140625 7.484375 -4.171875 7.484375 -5.28125 C 7.484375 -6.046875 6.828125 -6.78125 5.53125 -6.78125 L 2.3125 -6.78125 C 2.125 -6.78125 2.015625 -6.78125 2.015625 -6.59375 C 2.015625 -6.46875 2.109375 -6.46875 2.296875 -6.46875 C 2.4375 -6.46875 2.609375 -6.453125 2.734375 -6.453125 C 2.890625 -6.421875 2.953125 -6.40625 2.953125 -6.296875 C 2.953125 -6.25 2.9375 -6.21875 2.90625 -6.109375 L 1.578125 -0.78125 C 1.484375 -0.390625 1.453125 -0.3125 0.671875 -0.3125 C 0.5 -0.3125 0.390625 -0.3125 0.390625 -0.125 C 0.390625 0 0.515625 0 0.546875 0 C 0.828125 0 1.53125 -0.03125 1.8125 -0.03125 C 2.015625 -0.03125 2.234375 -0.015625 2.4375 -0.015625 C 2.65625 -0.015625 2.875 0 3.078125 0 C 3.15625 0 3.28125 0 3.28125 -0.203125 C 3.28125 -0.3125 3.1875 -0.3125 3 -0.3125 C 2.640625 -0.3125 2.359375 -0.3125 2.359375 -0.484375 C 2.359375 -0.546875 2.375 -0.59375 2.390625 -0.65625 Z M 3.71875 -6.09375 C 3.8125 -6.4375 3.828125 -6.46875 4.25 -6.46875 L 5.203125 -6.46875 C 6.03125 -6.46875 6.5625 -6.203125 6.5625 -5.515625 C 6.5625 -5.125 6.359375 -4.28125 5.96875 -3.921875 C 5.484375 -3.46875 4.875 -3.390625 4.4375 -3.390625 L 3.046875 -3.390625 Z M 3.71875 -6.09375 "/>
+</symbol>
+<symbol overflow="visible" id="f6_glyph0-9">
+<path style="stroke:none;" d="M 4.34375 -0.0625 C 5.890625 -0.640625 7.34375 -2.40625 7.34375 -4.328125 C 7.34375 -5.921875 6.296875 -7 4.8125 -7 C 2.671875 -7 0.484375 -4.75 0.484375 -2.4375 C 0.484375 -0.78125 1.59375 0.21875 3.03125 0.21875 C 3.28125 0.21875 3.609375 0.171875 4 0.0625 C 3.953125 0.6875 3.953125 0.703125 3.953125 0.828125 C 3.953125 1.15625 3.953125 1.921875 4.78125 1.921875 C 5.96875 1.921875 6.4375 0.109375 6.4375 0 C 6.4375 -0.0625 6.375 -0.09375 6.328125 -0.09375 C 6.25 -0.09375 6.234375 -0.046875 6.21875 0.015625 C 5.96875 0.71875 5.390625 0.96875 5.046875 0.96875 C 4.59375 0.96875 4.4375 0.6875 4.34375 -0.0625 Z M 2.46875 -0.140625 C 1.703125 -0.453125 1.359375 -1.21875 1.359375 -2.109375 C 1.359375 -2.796875 1.625 -4.203125 2.375 -5.28125 C 3.09375 -6.296875 4.03125 -6.75 4.75 -6.75 C 5.75 -6.75 6.46875 -5.96875 6.46875 -4.640625 C 6.46875 -3.65625 5.96875 -1.328125 4.296875 -0.390625 C 4.25 -0.75 4.140625 -1.46875 3.421875 -1.46875 C 2.890625 -1.46875 2.40625 -0.96875 2.40625 -0.453125 C 2.40625 -0.265625 2.46875 -0.15625 2.46875 -0.140625 Z M 3.078125 -0.03125 C 2.953125 -0.03125 2.625 -0.03125 2.625 -0.453125 C 2.625 -0.859375 3 -1.25 3.421875 -1.25 C 3.84375 -1.25 4.03125 -1.015625 4.03125 -0.40625 C 4.03125 -0.265625 4.015625 -0.25 3.921875 -0.203125 C 3.65625 -0.09375 3.359375 -0.03125 3.078125 -0.03125 Z M 3.078125 -0.03125 "/>
+</symbol>
+</g>
+</defs>
+<g id="f6_surface1">
+<path style="fill:none;stroke-width:0.3985;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -59.529878 -39.687091 L 59.528956 -39.687091 M 59.528956 -39.687091 L 119.056412 -0.000812784 L 19.842678 99.216843 M 59.528956 -39.687091 L 19.842678 99.216843 L -59.529878 -39.687091 M -39.684778 -26.458331 L 39.687778 -26.458331 L 79.374056 -0.000812784 " transform="matrix(0.995995,0,0,-0.995995,70.396943,117.639815)"/>
+<path style="fill:none;stroke-width:0.3985;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-dasharray:2.98883,2.98883;stroke-miterlimit:10;" d="M 59.528956 -39.687091 L 0.00150008 -0.000812784 M 0.00150008 -0.000812784 L -59.529878 -39.687091 M -39.684778 -26.458331 L 0.00150008 -0.000812784 L 79.374056 -0.000812784 M 0.00150008 -0.000812784 L 19.842678 99.216843 M 0.00150008 -0.000812784 L 119.056412 -0.000812784 M -59.529878 -39.687091 L 119.056412 -0.000812784 " transform="matrix(0.995995,0,0,-0.995995,70.396943,117.639815)"/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 71.089844 117.640625 C 71.089844 117.257813 70.78125 116.945313 70.398438 116.945313 C 70.011719 116.945313 69.703125 117.257813 69.703125 117.640625 C 69.703125 118.023438 70.011719 118.335938 70.398438 118.335938 C 70.78125 118.335938 71.089844 118.023438 71.089844 117.640625 Z M 71.089844 117.640625 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f6_glyph0-1" x="59.341396" y="116.795212"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 189.671875 117.640625 C 189.671875 117.257813 189.363281 116.945313 188.976563 116.945313 C 188.59375 116.945313 188.285156 117.257813 188.285156 117.640625 C 188.285156 118.023438 188.59375 118.335938 188.976563 118.335938 C 189.363281 118.335938 189.671875 118.023438 189.671875 117.640625 Z M 189.671875 117.640625 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f6_glyph0-2" x="193.435223" y="121.030183"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 130.382813 157.167969 C 130.382813 156.785156 130.074219 156.472656 129.6875 156.472656 C 129.304688 156.472656 128.996094 156.785156 128.996094 157.167969 C 128.996094 157.550781 129.304688 157.863281 129.6875 157.863281 C 130.074219 157.863281 130.382813 157.550781 130.382813 157.167969 Z M 130.382813 157.167969 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f6_glyph0-3" x="128.684577" y="168.516248"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 11.800781 157.167969 C 11.800781 156.785156 11.488281 156.472656 11.105469 156.472656 C 10.722656 156.472656 10.410156 156.785156 10.410156 157.167969 C 10.410156 157.550781 10.722656 157.863281 11.105469 157.863281 C 11.488281 157.863281 11.800781 157.550781 11.800781 157.167969 Z M 11.800781 157.167969 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f6_glyph0-4" x="6.861411" y="169.026198"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 90.855469 18.820313 C 90.855469 18.4375 90.542969 18.128906 90.160156 18.128906 C 89.777344 18.128906 89.464844 18.4375 89.464844 18.820313 C 89.464844 19.207031 89.777344 19.515625 90.160156 19.515625 C 90.542969 19.515625 90.855469 19.207031 90.855469 18.820313 Z M 90.855469 18.820313 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f6_glyph0-5" x="86.831861" y="13.743568"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 150.144531 117.640625 C 150.144531 117.257813 149.835938 116.945313 149.453125 116.945313 C 149.066406 116.945313 148.757813 117.257813 148.757813 117.640625 C 148.757813 118.023438 149.066406 118.335938 149.453125 118.335938 C 149.835938 118.335938 150.144531 118.023438 150.144531 117.640625 Z M 150.144531 117.640625 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f6_glyph0-6" x="152.438067" y="119.559098"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 110.621094 143.992188 C 110.621094 143.609375 110.308594 143.296875 109.925781 143.296875 C 109.542969 143.296875 109.230469 143.609375 109.230469 143.992188 C 109.230469 144.375 109.542969 144.6875 109.925781 144.6875 C 110.308594 144.6875 110.621094 144.375 110.621094 143.992188 Z M 110.621094 143.992188 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f6_glyph0-7" x="113.35621" y="150.278579"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 31.5625 143.992188 C 31.5625 143.609375 31.253906 143.296875 30.871094 143.296875 C 30.484375 143.296875 30.175781 143.609375 30.175781 143.992188 C 30.175781 144.375 30.484375 144.6875 30.871094 144.6875 C 31.253906 144.6875 31.5625 144.375 31.5625 143.992188 Z M 31.5625 143.992188 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f6_glyph0-8" x="18.526507" y="147.381229"/>
+</g>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 71.089844 117.640625 C 71.089844 117.257813 70.78125 116.945313 70.398438 116.945313 C 70.011719 116.945313 69.703125 117.257813 69.703125 117.640625 C 69.703125 118.023438 70.011719 118.335938 70.398438 118.335938 C 70.78125 118.335938 71.089844 118.023438 71.089844 117.640625 Z M 71.089844 117.640625 "/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#f6_glyph0-9" x="58.004771" y="120.065064"/>
+</g>
+</g>
+</svg></div></div></div></div></div></div>
+        <button type="button" class="submit-btn" id="submitBtn" onclick="submitQuiz()">Nộp Bài</button>
+        <button type="button" class="submit-btn" id="viewSolBtn" onclick="showPasswordPrompt()" style="background: #17a2b8;">Xem Đáp Án & Lời Giải</button>
+    </form>
+    
+    <div id="result"></div>
+    
+    <div id="passwordPrompt">
+        <h4>Mở Khóa Lời Giải</h4>
+        <p style="color: #856404; font-size: 14px; margin-top: 0;">Nhập mật khẩu từ Giáo viên để xem đáp án chi tiết.</p>
+        <input type="password" id="solPassword" placeholder="Nhập mật khẩu...">
+        <button type="button" onclick="checkPassword()">Xem</button>
+    </div>
+
+    <footer class="author-footer">Liên hệ Đỗ Khắc Quân - 0973 400 524</footer>
+
+    <script>
+        const ua = navigator.userAgent || navigator.vendor || window.opera;
+        if ((ua.indexOf("FBAN") === -1) && (ua.indexOf("FBAV") === -1) && (ua.indexOf("Zalo") === -1)) {
+            document.getElementById("zaloWarning").style.display = "none";
+        }
+
+        const GAS_URL = "https://script.google.com/macros/s/AKfycbwGXMNWT9mPvfab1wb1M2_6wgCMAJXQFDwUQdBWPR-Qf5NHugSmoLMCTxfnny0UK7tZ/exec"; 
+        const correctAnswers = {"P1_Cau_1": "C", "P1_Cau_2": "C", "P1_Cau_3": "C", "P1_Cau_4": "C", "P1_Cau_5": "A", "P1_Cau_6": "C", "P1_Cau_7": "A", "P1_Cau_8": "C", "P1_Cau_9": "A", "P1_Cau_10": "A", "P1_Cau_11": "D", "P1_Cau_12": "B", "P2_Cau_1_a": "Đúng", "P2_Cau_1_b": "Đúng", "P2_Cau_1_c": "Đúng", "P2_Cau_1_d": "Sai", "P2_Cau_2_a": "Đúng", "P2_Cau_2_b": "Sai", "P2_Cau_2_c": "Sai", "P2_Cau_2_d": "Đúng", "P2_Cau_3_a": "Đúng", "P2_Cau_3_b": "Đúng", "P2_Cau_3_c": "Sai", "P2_Cau_3_d": "Đúng", "P2_Cau_4_a": "Đúng", "P2_Cau_4_b": "Đúng", "P2_Cau_4_c": "Đúng", "P2_Cau_4_d": "Sai", "P3_Cau_1": "2", "P3_Cau_2": "-32", "P3_Cau_3": "46", "P3_Cau_4": "2", "P3_Cau_5": "6,33", "P3_Cau_6": "1,8"};
+        let isSubmitted = false;
+        
+        function moveNext(current, nextId) {
+            if (current.value.length > 1) current.value = current.value.slice(0, 1);
+            if (current.value.length === 1 && nextId) document.getElementById(nextId).focus();
+        }
+        function movePrev(e, current, prevId) {
+            if (e.key === "Backspace" && current.value === "" && prevId) document.getElementById(prevId).focus();
+        }
+
+        // =====================================================================
+        // LƯU TRẠNG THÁI (tải lại trang không mất bài, không reset đồng hồ)
+        // Thêm ?reset=1 vào đường dẫn để xóa trạng thái khi giáo viên muốn thử lại.
+        // =====================================================================
+        function hashStr(str) { let h = 5381; for (let i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) | 0; return (h >>> 0).toString(36); }
+        const STORE_KEY = 'quizstate:v2:' + location.pathname + '|' + document.title + '|' + hashStr(JSON.stringify(correctAnswers) + '|' + 90);
+        if (/[?&]reset=1(&|$)/.test(location.search)) { try { localStorage.removeItem(STORE_KEY); } catch (e) {} }
+
+        function loadState() { try { return JSON.parse(localStorage.getItem(STORE_KEY) || 'null'); } catch (e) { return null; } }
+        let state = loadState() || {};
+        function saveState(patch) {
+            Object.assign(state, patch);
+            try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {}   // bị chặn lưu (chế độ riêng tư...) thì chạy bằng bộ nhớ tạm
+        }
+        function newId() { return (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : (Date.now().toString(36) + Math.random().toString(36).slice(2, 10)); }
+
+        const DURATION_MS = 90 * 60 * 1000;
+        if (!state.endTime) saveState({ endTime: Date.now() + DURATION_MS });
+        if (!state.attemptId) saveState({ attemptId: newId() });
+
+        function formFields() { return Array.from(document.querySelectorAll('#studentName, #studentClass, #quizForm input, #quizForm textarea')); }
+        function collectAnswers() { return formFields().map(el => (el.type === 'radio' || el.type === 'checkbox') ? (el.checked ? 1 : 0) : el.value); }
+        function restoreAnswers(arr) {
+            const f = formFields();
+            if (!Array.isArray(arr) || arr.length !== f.length) return;
+            f.forEach((el, i) => { if (el.type === 'radio' || el.type === 'checkbox') el.checked = !!arr[i]; else el.value = arr[i]; });
+        }
+
+        let saveTimer;
+        function scheduleSave() {
+            if (isSubmitted) return;
+            clearTimeout(saveTimer);
+            saveTimer = setTimeout(() => saveState({ answers: collectAnswers() }), 250);
+        }
+        document.addEventListener('input', scheduleSave);
+        document.addEventListener('change', scheduleSave);
+        window.addEventListener('pagehide', () => { if (!isSubmitted) saveState({ answers: collectAnswers() }); });
+
+        const resDiv = document.getElementById('result');
+        function showResult(html) { resDiv.style.display = 'block'; resDiv.innerHTML = html; }
+        function lockForm() {
+            document.getElementById('submitBtn').style.display = 'none';
+            document.querySelectorAll('#quizForm input, #quizForm textarea, #studentName, #studentClass').forEach(el => el.disabled = true);
+        }
+        const scoreSpan = s => `<span style="font-size: 24px; color: red;">${s}</span>`;
+
+        // Gửi kết quả; mất mạng thì giữ lại và tự gửi lại (khi có mạng, hoặc mỗi 15 giây)
+        let sending = false;
+        function sendPayload() {
+            const finalScoreString = state.finalScore;
+            if (!GAS_URL) {
+                saveState({ sent: true });
+                showResult(`Đã chấm xong (chưa cấu hình nơi nhận kết quả).<br>Điểm của bạn: ${scoreSpan(finalScoreString)}`);
+                return;
+            }
+            if (sending) return;
+            sending = true;
+            fetch(GAS_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                keepalive: true,
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(state.payload)
+            }).then(() => {
+                sending = false;
+                saveState({ sent: true });
+                showResult(`Nộp bài thành công!<br>Điểm của bạn: ${scoreSpan(finalScoreString)}`);
+            }).catch(() => {
+                sending = false;
+                showResult(`Đã chấm xong nhưng <b>chưa gửi được</b> kết quả (mạng yếu).<br>Em hãy giữ nguyên trang này, bài sẽ tự gửi lại khi có mạng.<br>Điểm của bạn: ${scoreSpan(finalScoreString)}`);
+            });
+        }
+        function retryPending() { if (state.submitted && !state.sent) sendPayload(); }
+        window.addEventListener('online', retryPending);
+        setInterval(retryPending, 15000);
+
+        // Đồng hồ tính theo giờ kết thúc nên không lệch khi tab ở nền hoặc điện thoại khóa màn hình
+        const timerEl = document.getElementById("timer");
+        let timeoutFired = false;
+        const countdown = setInterval(tick, 500);
+        document.addEventListener('visibilitychange', tick);
+        function tick() {
+            if (isSubmitted) { clearInterval(countdown); return; }
+            const remain = Math.ceil((state.endTime - Date.now()) / 1000);
+            if (remain <= 0) {
+                if (timeoutFired) return;
+                timeoutFired = true;
+                clearInterval(countdown);
+                timerEl.innerHTML = "HẾT GIỜ!";
+                alert("Đã hết thời gian làm bài. Hệ thống tự động nộp bài!");
+                submitQuiz(true);
+            } else {
+                const m = Math.floor(remain / 60), s = remain % 60;
+                timerEl.innerHTML = m.toString().padStart(2, '0') + ":" + s.toString().padStart(2, '0');
+            }
+        }
+
+        // Khôi phục khi mở lại trang
+        restoreAnswers(state.answers);
+        if (state.submitted) {
+            isSubmitted = true;
+            lockForm();
+            timerEl.innerHTML = "ĐÃ NỘP BÀI";
+            if (state.sent) showResult(`Nộp bài thành công!<br>Điểm của bạn: ${scoreSpan(state.finalScore)}`);
+            else { showResult('Đang gửi lại kết quả...'); retryPending(); }
+        } else {
+            tick();
+        }
+
+        function submitQuiz(autoSubmit = false) {
+            if (isSubmitted) return;
+            const name = document.getElementById('studentName').value.trim();
+            const className = document.getElementById('studentClass').value.trim();
+            
+            if (!autoSubmit && (!name || !className)) {
+                alert("Vui lòng nhập đầy đủ Họ tên và Lớp trước khi nộp!");
+                return;
+            }
+
+            isSubmitted = true;
+            if (typeof timerEl !== 'undefined' && timerEl) {
+                timerEl.innerHTML = "ĐÃ NỘP BÀI";
+            }
+            
+            const form = document.getElementById('quizForm');
+            let score = 0;
+            
+            let payload = {
+                'name': name || "Vô danh (Hết giờ)",
+                'className': className || "N/A"
+            };
+
+            for (let i = 1; i <= 12; i++) {
+                const qName = `P1_Cau_${i}`;
+                const selected = form.querySelector(`input[name="${qName}"]:checked`);
+                let ans = selected ? selected.value : "K";
+                const correctVal = correctAnswers[qName];
+                
+                let isCorrect = (selected && selected.value === correctVal);
+                if (isCorrect) score += 0.25;
+                
+                let statusStr = isCorrect ? "Đúng" : (selected ? "Sai" : "K");
+                payload[qName] = `${ans} (${statusStr})`;
+            }
+
+            const labels_tf = ['a', 'b', 'c', 'd'];
+            for (let i = 1; i <= 4; i++) {
+                let correctCount = 0;
+                let questionDetail = [];
+                
+                labels_tf.forEach(l => {
+                    const qName = `P2_Cau_${i}_${l}`;
+                    if (correctAnswers[qName]) {
+                        const selected = form.querySelector(`input[name="${qName}"]:checked`);
+                        let ans = selected ? selected.value : "K";
+                        const correctVal = correctAnswers[qName];
+                        let isSubCorrect = (selected && selected.value === correctVal);
+                        if (isSubCorrect) correctCount++;
+                        
+                        let subStatus = isSubCorrect ? "Đ" : (selected ? "S" : "-");
+                        questionDetail.push(`${l}:${ans}(${subStatus})`);
+                    }
+                });
+                
+                let p2ScoreEarned = 0;
+                if (correctCount === 1) p2ScoreEarned = 0.1;
+                else if (correctCount === 2) p2ScoreEarned = 0.25;
+                else if (correctCount === 3) p2ScoreEarned = 0.5;
+                else if (correctCount === 4) p2ScoreEarned = 1.0;
+                
+                score += p2ScoreEarned;
+                payload[`P2_Cau_${i}`] = `[${correctCount} ý đúng] ${questionDetail.join(' ')}`;
+            }
+
+            for (let i = 1; i <= 6; i++) {
+                const qName = `P3_Cau_${i}`;
+                if (correctAnswers[qName]) {
+                    let ans = "";
+                    for (let j = 1; j <= 12; j++) {
+                        const box = document.getElementById(`${qName}_${j}`);
+                        if (box && box.value) ans += box.value;
+                    }
+                    
+                    let studentAns = ans.replace(/,/g, '.').replace(/\s+/g, '');
+                    let trueAns = correctAnswers[qName].replace(/,/g, '.').replace(/\s+/g, '');
+                    let isCorrect = (studentAns === trueAns && studentAns !== "");
+                    
+                    if (isCorrect) score += 0.5;
+                    
+                    let statusStr = isCorrect ? "Đúng" : (studentAns !== "" ? "Sai" : "K");
+                    payload[qName] = `${studentAns || 'Bỏ trống'} (${statusStr})`;
+                }
+            }
+
+            const finalScoreString = `${score.toFixed(2)}/10`;
+            payload['score'] = score.toFixed(2);
+            payload['maxScore'] = '10';
+            payload['attemptId'] = state.attemptId;   // để Apps Script bỏ các lần gửi trùng
+
+            lockForm();
+            saveState({ answers: collectAnswers(), submitted: true, sent: false, payload: payload, finalScore: finalScoreString });
+            showResult('Đã chấm xong, đang gửi kết quả...');
+            sendPayload();
+        }
+
+        function showPasswordPrompt() {
+            document.getElementById('passwordPrompt').style.display = 'block';
+            document.getElementById('viewSolBtn').style.display = 'none';
+            document.getElementById('passwordPrompt').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function checkPassword() {
+            const entered = document.getElementById('solPassword').value;
+            if (entered === "0973400524") {
+                document.getElementById('passwordPrompt').style.display = 'none';
+                revealSolutions();
+            } else {
+                alert("Mật khẩu không chính xác! Vui lòng liên hệ Giáo viên.");
+            }
+        }
+
+        function revealSolutions() {
+            isSubmitted = true;
+            
+            document.getElementById('submitBtn').style.display = 'none';
+            const allInputs = document.querySelectorAll('#quizForm input, #quizForm textarea');
+            allInputs.forEach(input => input.disabled = true);
+
+            const form = document.getElementById('quizForm');
+            
+            for (let i = 1; i <= 12; i++) {
+                const qName = `P1_Cau_${i}`;
+                const correctVal = correctAnswers[qName];
+                const allRadios = form.querySelectorAll(`input[name="${qName}"]`);
+                allRadios.forEach(radio => {
+                    const lbl = radio.closest('label');
+                    if (radio.value === correctVal) {
+                        lbl.style.backgroundColor = '#d4edda';
+                        lbl.style.borderColor = '#28a745';
+                    } else if (radio.checked) {
+                        lbl.style.backgroundColor = '#f8d7da';
+                        lbl.style.borderColor = '#dc3545';
+                    } else {
+                        lbl.style.opacity = '0.5';
+                    }
+                });
+            }
+
+            const labels_tf = ['a', 'b', 'c', 'd'];
+            for (let i = 1; i <= 4; i++) {
+                labels_tf.forEach(l => {
+                    const qName = `P2_Cau_${i}_${l}`;
+                    if (correctAnswers[qName]) {
+                        const correctVal = correctAnswers[qName];
+                        const allRadios = form.querySelectorAll(`input[name="${qName}"]`);
+                        allRadios.forEach(radio => {
+                            const lbl = radio.closest('label');
+                            if (radio.value === correctVal) {
+                                lbl.style.backgroundColor = '#d4edda';
+                                lbl.style.color = '#155724';
+                            } else if (radio.checked) {
+                                lbl.style.backgroundColor = '#f8d7da';
+                                lbl.style.color = '#721c24';
+                            } else {
+                                lbl.style.opacity = '0.5';
+                            }
+                        });
+                    }
+                });
+            }
+
+            for (let i = 1; i <= 6; i++) {
+                const qName = `P3_Cau_${i}`;
+                if (correctAnswers[qName]) {
+                    let ans = "";
+                    let boxes = [];
+                    for (let j = 1; j <= 12; j++) {
+                        const box = document.getElementById(`${qName}_${j}`);
+                        if (box) {
+                            boxes.push(box);
+                            if (box.value) ans += box.value;
+                        }
+                    }
+                    
+                    let studentAns = ans.replace(/,/g, '.').replace(/\s+/g, '');
+                    let trueAns = correctAnswers[qName].replace(/,/g, '.').replace(/\s+/g, '');
+                    let isCorrect = (studentAns === trueAns && studentAns !== "");
+                    
+                    boxes.forEach(box => {
+                        if (isCorrect) {
+                            box.style.backgroundColor = '#d4edda';
+                            box.style.borderColor = '#28a745';
+                            box.style.color = '#155724';
+                        } else {
+                            box.style.backgroundColor = '#f8d7da';
+                            box.style.borderColor = '#dc3545';
+                            box.style.color = '#721c24';
+                        }
+                    });
+
+                    const group = document.querySelector(`#${qName}_1`).closest('.options');
+                    let correctDiv = document.createElement('div');
+                    correctDiv.style.marginTop = '10px';
+                    correctDiv.innerHTML = `<span style="color:#28a745; font-weight:bold; font-size:16px;">Đáp án đúng: ${correctAnswers[qName]}</span>`;
+                    group.appendChild(correctDiv);
+                }
+            }
+
+            const solutions = document.querySelectorAll('.solution-box');
+            solutions.forEach(box => box.style.display = 'block');
+
+            // Chuẩn hóa lại SVG vừa hiện ra (lúc này mới đo được kích thước)
+            initMedia();
+            if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise().then(initMedia);
+        }
+
+        const MEDIA_SCOPE = '.question, .solution-box';
+        // =====================================================================
+        // XỬ LÝ SVG / ẢNH (dùng chung cho quiz và trình chiếu)
+        // Mỗi template khai báo trước: const MEDIA_SCOPE = '.vung-chua-hinh, ...';
+        // =====================================================================
+        const MEDIA_SVG_SEL = MEDIA_SCOPE.split(',').map(s => s.trim() + ' svg').join(', ');
+        const MEDIA_ALL_SEL = MEDIA_SCOPE.split(',').map(s => s.trim()).flatMap(s => [s + ' svg', s + ' img']).join(', ');
+
+        // Chỉ nhận số thuần hoặc "px"; "10cm", "50%", "auto"... trả về NaN để không đọc sai đơn vị
+        function svgNum(v) {
+            if (v == null) return NaN;
+            const m = String(v).trim().match(/^([0-9]*\.?[0-9]+)(px)?$/i);
+            return m ? parseFloat(m[1]) : NaN;
+        }
+
+        // Đổi id trong từng SVG thành duy nhất để các hình không dùng nhầm clipPath/marker/gradient của nhau
+        let __svgSeq = 0;
+        function uniquifySvgIds(svg) {
+            if (svg.dataset.idsDone) return;
+            svg.dataset.idsDone = '1';
+            const withId = svg.querySelectorAll('[id]');
+            if (!withId.length) return;
+            const prefix = 'svg' + (++__svgSeq) + '_';
+            const map = {};
+            withId.forEach(n => { map[n.id] = prefix + n.id; });
+            const ids = Object.keys(map);
+            const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const urlRe = /url\(\s*(['"]?)#([^)'"\s]+)\1\s*\)/g;
+            const fixUrls = str => str.replace(urlRe, (m, q, id) => map[id] ? `url(${q}#${map[id]}${q})` : m);
+
+            svg.querySelectorAll('*').forEach(n => {
+                if (n.tagName.toLowerCase() === 'style') {
+                    let css = fixUrls(n.textContent);
+                    css = css.replace(new RegExp('#(' + ids.map(esc).join('|') + ')(?![\\w-])', 'g'), '#' + prefix + '$1');
+                    n.textContent = css;
+                    return;
+                }
+                Array.from(n.attributes).forEach(a => {
+                    if (a.name === 'id' || a.value.indexOf('#') < 0) return;
+                    if ((a.name === 'href' || a.name === 'xlink:href') && a.value.charAt(0) === '#') {
+                        const id = a.value.slice(1);
+                        if (map[id]) n.setAttribute(a.name, '#' + map[id]);
+                    } else {
+                        const nv = fixUrls(a.value);
+                        if (nv !== a.value) n.setAttribute(a.name, nv);
+                    }
+                });
+            });
+            withId.forEach(n => { n.id = map[n.id]; });
+        }
+
+        // Chuẩn hóa SVG: id duy nhất + thêm viewBox nếu thiếu để SVG co giãn đúng
+        function normalizeSvgs() {
+            document.querySelectorAll(MEDIA_SVG_SEL).forEach(svg => {
+                if (svg.closest('mjx-container')) return;
+                uniquifySvgIds(svg);
+                if (svg.dataset.normalized) return;
+                const w = svgNum(svg.getAttribute('width'));
+                const h = svgNum(svg.getAttribute('height'));
+
+                if (!svg.hasAttribute('viewBox')) {
+                    if (w > 0 && h > 0) {
+                        svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+                    } else {
+                        try {   // đang bị ẩn thì getBBox lỗi -> sẽ thử lại khi phần chứa nó hiện ra
+                            const b = svg.getBBox();
+                            if (b.width && b.height)
+                                svg.setAttribute('viewBox', `${b.x - 2} ${b.y - 2} ${b.width + 4} ${b.height + 4}`);
+                        } catch (e) { return; }
+                    }
+                }
+                if (svg.hasAttribute('viewBox')) {
+                    if (w > 0) { svg.style.width = '100%'; svg.style.maxWidth = w + 'px'; }  // kích thước gốc làm trần
+                    svg.removeAttribute('height');
+                    svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+                    svg.dataset.normalized = '1';
+                }
+            });
+        }
+
+        // Zoom: phóng to bằng cách tăng chiều rộng thật, khung tự cao theo, cuộn bằng thanh cuộn gốc
+        const __zoomRefresh = new Set();
+        let __zoomResizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(__zoomResizeTimer);
+            __zoomResizeTimer = setTimeout(() => __zoomRefresh.forEach(fn => fn()), 150);
+        });
+
+        function setupImageZoom() {
+            document.querySelectorAll(MEDIA_ALL_SEL).forEach(el => {
+                if (el.closest('.zoom-container') || el.closest('mjx-container') || el.classList.contains('no-zoom')) return;
+
+                const wrapper = document.createElement('div');
+                wrapper.className = 'zoom-container';
+                const viewport = document.createElement('div');
+                viewport.className = 'zoom-viewport';
+                el.parentNode.insertBefore(wrapper, el);
+                viewport.appendChild(el);
+                wrapper.appendChild(viewport);
+                el.classList.add('zoom-media');
+
+                let scale = 1;
+                const STEP = 0.25, MIN = 1, MAX = 4;
+
+                const toolbar = document.createElement('div');
+                toolbar.className = 'zoom-toolbar';
+                const mk = (txt, title) => {
+                    const b = document.createElement('button');
+                    b.type = 'button'; b.className = 'zoom-btn'; b.innerHTML = txt; b.title = title;
+                    b.setAttribute('aria-label', title);
+                    return b;
+                };
+                const btnIn = mk('➕', 'Phóng to'), btnOut = mk('➖', 'Thu nhỏ'), btnReset = mk('↺', 'Mặc định');
+
+                function apply(newScale) {
+                    const cx = viewport.scrollWidth ? (viewport.scrollLeft + viewport.clientWidth / 2) / viewport.scrollWidth : 0.5;
+                    const cy = viewport.scrollHeight ? (viewport.scrollTop + viewport.clientHeight / 2) / viewport.scrollHeight : 0.5;
+
+                    scale = Math.min(MAX, Math.max(MIN, Math.round(newScale * 100) / 100));
+
+                    el.classList.remove('zoomed');
+                    el.style.removeProperty('--zw');
+                    const base = el.getBoundingClientRect().width;   // chiều rộng vừa khung hiện tại
+                    if (scale > 1 && base > 0) {
+                        el.style.setProperty('--zw', (base * scale) + 'px');
+                        el.classList.add('zoomed');
+                        viewport.scrollLeft = cx * viewport.scrollWidth - viewport.clientWidth / 2;
+                        viewport.scrollTop = cy * viewport.scrollHeight - viewport.clientHeight / 2;
+                    }
+                    viewport.classList.toggle('can-pan', el.classList.contains('zoomed'));
+                    btnIn.disabled = scale >= MAX;
+                    btnOut.disabled = scale <= MIN;
+                }
+
+                btnIn.onclick = () => apply(scale + STEP);
+                btnOut.onclick = () => apply(scale - STEP);
+                btnReset.onclick = () => apply(1);
+                __zoomRefresh.add(() => { if (scale > 1) apply(scale); });
+
+                // Ctrl + lăn chuột để zoom, nhấp đúp để phóng to/reset
+                viewport.addEventListener('wheel', e => {
+                    if (!e.ctrlKey) return;
+                    e.preventDefault();
+                    apply(scale + (e.deltaY < 0 ? STEP : -STEP));
+                }, { passive: false });
+                viewport.addEventListener('dblclick', () => apply(scale > 1 ? 1 : 2));
+
+                // Kéo thả bằng chuột (cảm ứng dùng cuộn gốc của trình duyệt)
+                let dragging = false, sx = 0, sy = 0, sl = 0, st = 0;
+                viewport.addEventListener('pointerdown', e => {
+                    if (e.pointerType !== 'mouse' || !el.classList.contains('zoomed')) return;
+                    dragging = true; sx = e.clientX; sy = e.clientY; sl = viewport.scrollLeft; st = viewport.scrollTop;
+                    viewport.setPointerCapture(e.pointerId);
+                    viewport.classList.add('dragging');
+                });
+                viewport.addEventListener('pointermove', e => {
+                    if (!dragging) return;
+                    viewport.scrollLeft = sl - (e.clientX - sx);
+                    viewport.scrollTop = st - (e.clientY - sy);
+                });
+                const stop = () => { dragging = false; viewport.classList.remove('dragging'); };
+                viewport.addEventListener('pointerup', stop);
+                viewport.addEventListener('pointercancel', stop);
+
+                toolbar.append(btnIn, btnOut, btnReset);
+                wrapper.appendChild(toolbar);
+                apply(1);
+            });
+        }
+
+        function initMedia() { normalizeSvgs(); setupImageZoom(); }
+
+        window.addEventListener('load', () => setTimeout(initMedia, 300));
+
+    </script>
+</body>
+</html>
